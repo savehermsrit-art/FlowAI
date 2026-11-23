@@ -1,0 +1,47 @@
+{
+  "source": {
+    "id": "dssp-home",
+    "url": "https://dssp.karnataka.gov.in/dssp/",
+    "title": "Directorate of Social Security and Pensions",
+    "department": "Revenue Department",
+    "scheme_id": null,
+    "language": "kn",
+    "type": "html",
+    "retrieved_at": "2026-11-23T18:01:53.053422+00:00",
+    "source_version": "e74d4d3f9641",
+    "content_hash": "e74d4d3f96413bd5f9207ce8d665652971e0f28c26fe2761446dbbdacbd4754a",
+    "publication_date": null,
+    "effective_date": null,
+    "raw_path": "raw/e74d4d3f96413bd5f9207ce8d665652971e0f28c26fe2761446dbbdacbd4754a.html",
+    "content_type": "text/html",
+    "status": "fetched",
+    "site_last_updated": "06-10-2026",
+    "passage_count": 3
+  },
+  "passages": [
+    {
+      "id": "dssp-home:e74d4d3f9641:1",
+      "source_id": "dssp-home",
+      "scheme_id": null,
+      "department": "Revenue Department",
+      "language": "kn",
+      "version": "e74d4d3f9641",
+      "section": "ಮುಖಪುಟ",
+      "page": null,
+      "text": "ಪ್ರಪಂಚದ ಜನಸಂಖ್ಯೆಯಲ್ಲಿ 1/3 ಭಾಗದಷ್ಟು ಮಂದಿ ದಾರುಣವಾದ ಬಡತನದ ಸಂಕಷ್ಟಕ್ಕೆ ಸಿಲುಕಿ ತೀರಾ ಹಿಂದುಳಿದ ಪ್ರದೇಶಗಳಲ್ಲಿ ವಾಸಿಸುತ್ತಿದ್ದು ಶಿಕ್ಷಣವಿಲ್ಲದೆ ಅನಾರೋಗ್ಯ ಮುಂತಾದ ತೊಂದರೆಗಳನ್ನು ಎದುರಿಸುತ್ತಿದ್ದಾರೆ. ಇಂತಹವರಿಗೆ ಆರ್ಥಿಕ ರಕ್ಚಣೆ ಹಾಗೂ ಸಾಮಾಜಿಕ ನ್ಯಾಯ ದೊರಕಿಸಿ ಸಮಾಜದ ಮುಖ್ಯವಾಹಿನಿಗೆ ತರುವಲ್ಲಿ ಸಾಮಾಜಿಕ ಭದ್ರತಾ ಯೋಜನೆಗಳ ಪಾತ್ರ ಅತ್ಯಂತ ಪ್ರಮುಖವಾಗಿರುತ್ತವೆ. ವೃದ್ಧಾಪ್ಯ, ಕಾಯಿಲೆಗಳು, ಗರ್ಬಾವಸ್ಥೆ, ನಿರುದ್ಯೋಗ, ಅಂಗವಿಕಲತೆ, ಇತರೇ ಕಾರಣಗಳಿಂದ ಉಂಟಾಗುವ ಆರ್ಥಿಕ ಹಾಗೂ ಸಾಮಾಜಿಕ ಸಂಕಷ್ಟಗಳಿಂದ ಸಮಾಜದ ಸದಸ್ಯರಿಗೆ ಸಾರ್ವತ್ರಿಕ ಪರಿಹಾರದ ಮೂಲಕ ಒದಗಿಸುವ ಭದ್ರತೆ ಎಂಬುದಾಗಿ ಅಂತರಾಷ್ಟ್ರೀಯ ಕಾರ್ಮಿಕರ ಸಂಸ್ಥೆಯು ಸಾಮಾಜಿಕ ಭದ್ರತೆ ಯೋಜನೆಗಳ ಕುರಿತು ಅರ್ಥೈಸಿದೆ.",
+      "url": "https://dssp.karnataka.gov.in/dssp/"
+    },
+    {
+      "id": "dssp-home:e74d4d3f9641:2",
+      "source_id": "dssp-home",
+      "scheme_id": null,
+      "department": "Revenue Department",
+      "language": "kn",
+      "version": "e74d4d3f9641",
+      "section": "ಮುಖಪುಟ",
+      "page": null,
+      "text": "Last Updated:",
+      "url": "https://dssp.karnataka.gov.in/dssp/"
+    }
+  ]
+}

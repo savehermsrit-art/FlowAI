@@ -1,5 +1,7 @@
 # FormFlow AI implementation record
 
+Research update, 23 November 2026: see [docs/RESEARCH_PROTOTYPE.md](docs/RESEARCH_PROTOTYPE.md) for the archived official corpus, source-linked Q&A, optional measured BGE retrieval, synthetic evidence guidance and current blockers. The record below describes the earlier fictional-demo milestone and its then-current environment.
+
 Last verified: 17 November 2026 (Asia/Kolkata).
 
 ## Current status

@@ -1,0 +1,15 @@
+{
+  "version": "2026-11-23-v1",
+  "split": "development",
+  "status": "synthetic author-specified optimizer cases; no real applicant documents",
+  "cases": [
+    {"id":"separate","conditions":[{"id":"age","status":"INSUFFICIENT_EVIDENCE","required_documents":["age_proof"]},{"id":"income","status":"INSUFFICIENT_EVIDENCE","required_documents":["income"]}],"expected_documents":["age_proof","income"],"expected_unmapped":[]},
+    {"id":"shared","conditions":[{"id":"age","status":"INSUFFICIENT_EVIDENCE","required_documents":["identity","age_proof"]},{"id":"residence","status":"INSUFFICIENT_EVIDENCE","required_documents":["identity","residence"]}],"expected_documents":["identity"],"expected_unmapped":[]},
+    {"id":"alternative","conditions":[{"id":"age","status":"INSUFFICIENT_EVIDENCE","required_documents":["age_proof","identity"]},{"id":"residence","status":"INSUFFICIENT_EVIDENCE","required_documents":["residence","identity"]}],"expected_documents":["identity"],"expected_unmapped":[]},
+    {"id":"unmapped","conditions":[{"id":"pension","status":"INSUFFICIENT_EVIDENCE","required_documents":[]}],"expected_documents":[],"expected_unmapped":["pension"]},
+    {"id":"known_and_missing","conditions":[{"id":"age","status":"SATISFIED","required_documents":[]},{"id":"income","status":"INSUFFICIENT_EVIDENCE","required_documents":["income"]}],"expected_documents":["income"],"expected_unmapped":[]},
+    {"id":"rule_not_effective","conditions":[{"id":"age","status":"INSUFFICIENT_EVIDENCE","reason":"RULE_NOT_EFFECTIVE","required_documents":["age_proof"]}],"expected_documents":[],"expected_unmapped":["age"]},
+    {"id":"conflicting","conditions":[{"id":"age","status":"INSUFFICIENT_EVIDENCE","reason":"CONFLICTING_EVIDENCE","required_documents":["age_proof"]}],"expected_documents":["age_proof"],"expected_unmapped":[]},
+    {"id":"two_cover_three","conditions":[{"id":"age","status":"INSUFFICIENT_EVIDENCE","required_documents":["identity"]},{"id":"residence","status":"INSUFFICIENT_EVIDENCE","required_documents":["identity"]},{"id":"income","status":"INSUFFICIENT_EVIDENCE","required_documents":["income"]}],"expected_documents":["identity","income"],"expected_unmapped":[]}
+  ]
+}

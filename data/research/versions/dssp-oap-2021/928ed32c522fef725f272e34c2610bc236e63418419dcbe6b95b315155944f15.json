@@ -1,0 +1,22 @@
+{
+  "source": {
+    "id": "dssp-oap-2021",
+    "url": "https://dssp.karnataka.gov.in/dssp/documents/OAP_1000_1200.pdf",
+    "title": "Old Age Pension order 18 September 2021",
+    "department": "Revenue Department",
+    "scheme_id": "ka-ignoaps",
+    "language": "kn",
+    "type": "pdf",
+    "publication_date": "2021-09-18",
+    "retrieved_at": "2026-11-23T18:01:57.752923+00:00",
+    "source_version": "928ed32c522f",
+    "content_hash": "928ed32c522fef725f272e34c2610bc236e63418419dcbe6b95b315155944f15",
+    "effective_date": null,
+    "raw_path": "raw/928ed32c522fef725f272e34c2610bc236e63418419dcbe6b95b315155944f15.pdf",
+    "content_type": "application/pdf",
+    "status": "fetched",
+    "extraction_note": "Embedded text is not usable Kannada; PDF retained for independent OCR and review",
+    "passage_count": 0
+  },
+  "passages": []
+}

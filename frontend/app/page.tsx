@@ -30,6 +30,9 @@ import {
   Profile,
   Proposal,
   Result,
+  ResearchAnswer,
+  ResearchScheme,
+  ResearchStatus,
   Scheme,
   User,
 } from "./api";
@@ -59,6 +62,11 @@ export default function FormFlow() {
     [assessment, setAssessment] = useState<Assessment | null>(null),
     [history, setHistory] = useState<Assessment[]>([]),
     [registry, setRegistry] = useState<Scheme[]>([]),
+    [researchSchemes, setResearchSchemes] = useState<ResearchScheme[]>([]),
+    [researchQuestion, setResearchQuestion] = useState(""),
+    [researchAnswer, setResearchAnswer] = useState<ResearchAnswer | null>(null),
+    [researchScheme, setResearchScheme] = useState<string>(""),
+    [researchStatus, setResearchStatus] = useState<ResearchStatus | null>(null),
     [overview, setOverview] = useState<Overview | null>(null),
     [error, setError] = useState(""),
     [busy, setBusy] = useState(false),
@@ -169,9 +177,17 @@ export default function FormFlow() {
       api<Profile[]>("/profiles")
         .then(setProfiles)
         .catch((e) => setError(e.message));
+    if (page === "schemes")
+      api<ResearchScheme[]>("/research/schemes")
+        .then(setResearchSchemes)
+        .catch((e) => setError(e.message));
     if (user && page === "admin")
       api<Overview>("/admin/overview")
         .then(setOverview)
+        .catch((e) => setError(e.message));
+    if (user?.role === "admin" && page === "admin")
+      api<ResearchStatus>("/admin/research")
+        .then(setResearchStatus)
         .catch((e) => setError(e.message));
     if (profile && page === "history")
       api<Assessment[]>(`/profiles/${profile.id}/evaluations`)
@@ -361,7 +377,10 @@ export default function FormFlow() {
           <button
             className="language"
             aria-label={t("language")}
-            onClick={() => setLang(lang === "en" ? "kn" : "en")}
+            onClick={() => {
+              setLang(lang === "en" ? "kn" : "en");
+              setResearchAnswer(null);
+            }}
           >
             {lang === "en" ? "ಕನ್ನಡ" : "English"}
             <span>↔</span>
@@ -1271,30 +1290,230 @@ export default function FormFlow() {
             <p className="eyebrow">{t("region")}</p>
             <h1 className="page-title">{t("registry")}</h1>
             <p className="muted max-width">{t("registryText")}</p>
+            <div className="research-intro">
+              <span className="tag">
+                {lang === "kn" ? "ಸರ್ಕಾರಿ ಮೂಲಗಳು" : "OFFICIAL SOURCE RESEARCH"}
+              </span>
+              <h2>
+                {lang === "kn"
+                  ? "ಪಿಂಚಣಿ ಯೋಜನೆಗಳ ಮಾಹಿತಿ"
+                  : "Explore source linked pension guidance"}
+              </h2>
+              <p>
+                {lang === "kn"
+                  ? "ನಿಯಮಗಳು ಸ್ವತಂತ್ರ ಪರಿಶೀಲನೆಗಾಗಿ ಕಾಯುತ್ತಿವೆ. ವೈಯಕ್ತಿಕ ಅರ್ಹತಾ ನಿರ್ಧಾರ ಲಭ್ಯವಿಲ್ಲ."
+                  : "These government pages are archived and linked below. Rule versions and government orders still need independent review before personal eligibility assessment."}
+              </p>
+            </div>
             <div className="registry-grid">
-              {registry.map((s) => (
-                <article className="panel registry-card" key={s.id}>
-                  <span className={"tag " + (s.mode === "DEMO" ? "light" : "")}>
-                    {s.mode === "DEMO" ? t("demoOnly") : t("unavailable")}
+              {researchSchemes.map((s) => (
+                <article
+                  className="panel registry-card research-card"
+                  key={s.id}
+                >
+                  <span className="tag light">
+                    {lang === "kn" ? "ಪರಿಶೀಲನೆ ಬಾಕಿ" : "Rule review pending"}
                   </span>
                   <h2>{lang === "kn" ? s.name_kn : s.name}</h2>
-                  <p>{lang === "kn" ? t("registryText") : s.description}</p>
-                  <small>
-                    {s.department} · {s.category}
-                  </small>
-                  {s.source_url && (
-                    <a
-                      className="text-action"
-                      href={s.source_url}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      {t("official")}
-                      <ArrowUpRight size={17} />
-                    </a>
-                  )}
+                  <details>
+                    <summary>
+                      {lang === "kn"
+                        ? "ಅರ್ಹತೆ ಮತ್ತು ಹೊರತಾಗಿರುವವರು"
+                        : "Eligibility and exceptions"}
+                    </summary>
+                    <ul>
+                      {[...s.eligibility, ...s.exceptions].map((f, i) => (
+                        <li key={i}>
+                          {lang === "kn" ? f.value_kn || f.value : f.value}
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
+                  <details>
+                    <summary>
+                      {lang === "kn"
+                        ? "ಪ್ರಯೋಜನ ಮತ್ತು ಅರ್ಜಿ"
+                        : "Benefits and application"}
+                    </summary>
+                    <ul>
+                      {[...s.benefits, ...s.application].map((f, i) => (
+                        <li key={i}>
+                          {lang === "kn" ? f.value_kn || f.value : f.value}
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
+                  <details>
+                    <summary>
+                      {lang === "kn"
+                        ? "ಅರ್ಜಿಗೆ ಬೇಕಾದ ದಾಖಲೆಗಳು"
+                        : "Application documents"}
+                    </summary>
+                    <ul>
+                      {s.application_documents.map((f, i) => (
+                        <li key={i}>
+                          {lang === "kn" ? f.value_kn || f.value : f.value}
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
+                  <p className="review-note">
+                    {lang === "kn"
+                      ? "ಸರ್ಕಾರಿ ಆದೇಶಗಳು ಮತ್ತು ಅರ್ಹತಾ ನಿಯಮಗಳ ಸ್ವತಂತ್ರ ಪರಿಶೀಲನೆ ಬಾಕಿ ಇದೆ."
+                      : `${s.review_status}. ${s.unresolved.join(" ")}`}
+                  </p>
+                  <a
+                    className="text-action"
+                    href={s.primary_url}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {lang === "kn" ? "ಅಧಿಕೃತ ಮೂಲ" : "Read official page"}{" "}
+                    <ArrowUpRight size={17} />
+                  </a>
+                  <button
+                    className="btn secondary"
+                    onClick={() => {
+                      setResearchScheme(s.id);
+                      setResearchAnswer(null);
+                      setResearchQuestion(
+                        lang === "kn"
+                          ? `${s.name_kn} ಅರ್ಹತೆ ಏನು?`
+                          : `What are the eligibility conditions for ${s.name}?`,
+                      );
+                      document.getElementById("research-question")?.focus();
+                    }}
+                  >
+                    {lang === "kn"
+                      ? "ಈ ಯೋಜನೆಯ ಬಗ್ಗೆ ಕೇಳಿ"
+                      : "Ask about this scheme"}
+                  </button>
                 </article>
               ))}
+            </div>
+            <form
+              className="panel form-stack research-ask"
+              onSubmit={(e) => {
+                e.preventDefault();
+                run(async () =>
+                  setResearchAnswer(
+                    await api<ResearchAnswer>(
+                      `/research/ask?q=${encodeURIComponent(researchQuestion)}${researchScheme ? `&scheme_id=${encodeURIComponent(researchScheme)}` : ""}`,
+                    ),
+                  ),
+                );
+              }}
+            >
+              <h2>
+                {lang === "kn"
+                  ? "ಮೂಲಗಳ ಆಧಾರದ ಮೇಲೆ ಪ್ರಶ್ನೆ ಕೇಳಿ"
+                  : "Ask a question about official sources"}
+              </h2>
+              <label htmlFor="research-scheme">
+                {lang === "kn" ? "ಯೋಜನೆ" : "Scheme"}
+              </label>
+              <select
+                id="research-scheme"
+                value={researchScheme}
+                onChange={(e) => {
+                  setResearchScheme(e.target.value);
+                  setResearchAnswer(null);
+                }}
+              >
+                <option value="">
+                  {lang === "kn" ? "ಎಲ್ಲಾ ಯೋಜನೆಗಳು" : "All schemes"}
+                </option>
+                {researchSchemes.map((s) => (
+                  <option value={s.id} key={s.id}>
+                    {lang === "kn" ? s.name_kn : s.name}
+                  </option>
+                ))}
+              </select>
+              <label htmlFor="research-question">
+                {lang === "kn" ? "ನಿಮ್ಮ ಪ್ರಶ್ನೆ" : "Your question"}
+              </label>
+              <input
+                id="research-question"
+                value={researchQuestion}
+                onChange={(e) => {
+                  setResearchQuestion(e.target.value);
+                  setResearchAnswer(null);
+                }}
+                minLength={3}
+                maxLength={500}
+                required
+                placeholder={
+                  lang === "kn"
+                    ? "ವಯಸ್ಸಿನ ಅರ್ಹತೆ ಏನು?"
+                    : "What is the age requirement?"
+                }
+              />
+              <button className="btn" disabled={busy}>
+                {busy
+                  ? lang === "kn"
+                    ? "ಹುಡುಕುತ್ತಿದೆ…"
+                    : "Searching…"
+                  : lang === "kn"
+                    ? "ಉತ್ತರ ಹುಡುಕಿ"
+                    : "Find answer"}
+              </button>
+              {researchAnswer && (
+                <div className="answer-panel" aria-live="polite">
+                  <strong>
+                    {lang === "kn" ? "ಮೂಲದ ಮಾಹಿತಿ" : "Source linked guidance"}
+                  </strong>
+                  <p>{researchAnswer.answer}</p>
+                  <small>
+                    {lang === "kn"
+                      ? "ಮೂಲ ಉಲ್ಲೇಖಗಳನ್ನು ಪರಿಶೀಲಿಸಿ; ವೈಯಕ್ತಿಕ ಅರ್ಹತಾ ನಿರ್ಧಾರವಲ್ಲ."
+                      : researchAnswer.model_status}
+                  </small>
+                  {researchAnswer.citations.map((c) => (
+                    <blockquote key={c.id}>
+                      <a href={c.url} target="_blank" rel="noreferrer">
+                        {c.section}
+                        {c.page ? ` · page ${c.page}` : ""} · {c.source_version}{" "}
+                        <ArrowUpRight size={13} />
+                      </a>
+                      <p lang="kn">{c.text}</p>
+                    </blockquote>
+                  ))}
+                </div>
+              )}
+            </form>
+            <h2 className="demo-list-title">
+              {lang === "kn"
+                ? "ಕಾಲ್ಪನಿಕ ಮೌಲ್ಯಮಾಪನ ಮಾದರಿಗಳು"
+                : "Fictional assessment examples"}
+            </h2>
+            <div className="registry-grid">
+              {registry
+                .filter((s) => s.mode === "DEMO")
+                .map((s) => (
+                  <article className="panel registry-card" key={s.id}>
+                    <span
+                      className={"tag " + (s.mode === "DEMO" ? "light" : "")}
+                    >
+                      {s.mode === "DEMO" ? t("demoOnly") : t("unavailable")}
+                    </span>
+                    <h2>{lang === "kn" ? s.name_kn : s.name}</h2>
+                    <p>{lang === "kn" ? t("registryText") : s.description}</p>
+                    <small>
+                      {s.department} · {s.category}
+                    </small>
+                    {s.source_url && (
+                      <a
+                        className="text-action"
+                        href={s.source_url}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {t("official")}
+                        <ArrowUpRight size={17} />
+                      </a>
+                    )}
+                  </article>
+                ))}
             </div>
             <form
               className="panel form-stack"
@@ -1331,6 +1550,50 @@ export default function FormFlow() {
             <p className="eyebrow">{t("adminAccess")}</p>
             <h1 className="page-title">{t("adminTitle")}</h1>
             <p className="muted max-width">{t("adminText")}</p>
+            <details className="panel research-admin" open>
+              <summary>
+                Official research corpus ·{" "}
+                {researchStatus?.sources.filter((s) => s.status === "fetched")
+                  .length ?? 0}{" "}
+                fetched / {researchStatus?.sources.length ?? 0} sources
+              </summary>
+              <p>
+                Passages: {researchStatus?.passage_count ?? 0}. Dense model:{" "}
+                {researchStatus?.dense_model || "not configured"}. Reranker:{" "}
+                {researchStatus?.reranker_model || "not configured"}.
+              </p>
+              {researchStatus?.model_error && (
+                <p className="error-text">{researchStatus.model_error}</p>
+              )}
+              {researchStatus?.sources.map((source) => (
+                <div className="source-row" key={source.id}>
+                  <strong>{source.title}</strong>
+                  <p>
+                    {source.status} · retrieved{" "}
+                    {new Date(source.retrieved_at).toLocaleString()} · version{" "}
+                    {source.content_hash?.slice(0, 12) || "unavailable"}
+                  </p>
+                  {source.error && <p className="error-text">{source.error}</p>}
+                  {source.extraction_note && (
+                    <p className="error-text">{source.extraction_note}</p>
+                  )}
+                  <a href={source.url} target="_blank" rel="noreferrer">
+                    Official source <ArrowUpRight size={13} />
+                  </a>
+                </div>
+              ))}
+              {researchStatus?.evaluation && (
+                <pre>
+                  {JSON.stringify(researchStatus.evaluation.results, null, 2)}
+                </pre>
+              )}
+              <p>
+                To collect new versions, run{" "}
+                <code>python scripts/ingest_official.py</code>, inspect changed
+                passages, then rebuild reviewed annotations. Source changes
+                never activate rules automatically.
+              </p>
+            </details>
             <div className="admin-actions">
               {[
                 ["simulate", "/admin/simulate-change"],
@@ -1691,6 +1954,38 @@ function ResultCard({
       </details>
       <details open>
         <summary>{t("checklist")}</summary>
+        {r.evidence_guidance &&
+          r.evidence_guidance.unresolved_conditions.length > 0 && (
+            <div className="notice evidence-guidance">
+              <div>
+                <strong>
+                  {lang === "kn"
+                    ? "ಮುಂದಿನ ಸಾಕ್ಷ್ಯ"
+                    : "Smallest mapped evidence set"}
+                </strong>
+                <p>
+                  {lang === "kn"
+                    ? "ಇವು ಪರಿಶೀಲಿಸದ ಷರತ್ತುಗಳನ್ನು ಸ್ಪಷ್ಟಪಡಿಸಲು ಸಹಾಯ ಮಾಡುವ ದಾಖಲೆಗಳು; ಅರ್ಹತೆಯ ಪುರಾವೆಯಲ್ಲ."
+                    : "These document categories could resolve unresolved conditions. They do not establish eligibility by themselves."}
+                </p>
+                <ul>
+                  {r.evidence_guidance.documents.map((item) => (
+                    <li key={item.document_type}>
+                      {t(item.document_type)} → {item.resolves.join(", ")}
+                    </li>
+                  ))}
+                </ul>
+                {r.evidence_guidance.no_sufficient_mapping.length > 0 && (
+                  <p>
+                    {lang === "kn"
+                      ? "ಈ ಷರತ್ತುಗಳಿಗೆ ಸಾಕಷ್ಟು ದಾಖಲೆ ನಕ್ಷೆ ಇಲ್ಲ:"
+                      : "No sufficient document mapping for:"}{" "}
+                    {r.evidence_guidance.no_sufficient_mapping.join(", ")}
+                  </p>
+                )}
+              </div>
+            </div>
+          )}
         <div className="checklist-grid">
           {Object.entries(groups).map(([group, key]) => {
             const items = r.checklist.filter((i) => i.group === group);
@@ -1747,6 +2042,18 @@ function ProposalCard({
           <pre className="diff-new">{p.new_text}</pre>
         </div>
       </div>
+      {p.impact && (
+        <div className="notice">
+          <div>
+            <strong>Potential reassessment impact</strong>
+            <p>{p.impact.reason}</p>
+            <p>
+              Conditions: {p.impact.condition_ids.join(", ") || "none mapped"} ·
+              Previous assessments: {p.impact.assessment_ids.length}
+            </p>
+          </div>
+        </div>
+      )}
       <details>
         <summary>
           {t("rules")} / {t("regression")}

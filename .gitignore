@@ -2,6 +2,7 @@
 .venv/
 data/*
 !data/.keep
+!data/research/
 **/__pycache__/
 **/.pytest_cache/
 **/.ruff_cache/

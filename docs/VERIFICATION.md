@@ -42,3 +42,8 @@ Saved output: `data/verification-tests.log`, `data/verification-checks.log`, `da
 | Caseworker agreement, formal legal compliance, population-level OCR accuracy | Not established |
 
 The overall specification is **partially complete**; the local DEMO is functional. Do not present this as ready for real citizen data or official eligibility decisions.
+# Research prototype verification · 23 November 2026
+
+On Apple Silicon macOS with Colima Docker, `docker compose up -d --build --wait --wait-timeout 300` completed with all seven services healthy. The backend smoke command passed PostgreSQL migration `001`, pgvector, real Tesseract OCR, encrypted MinIO storage, Celery processing, Kannada PDF export, object deletion and three official source snapshots with no fetch error. `docker compose exec -T backend python -m pytest backend/tests -q` passed 122 tests. `npx playwright test` passed 9 production Chromium tests, including two new English/Kannada official Q&A tests and the existing document, assessment, report and administration journeys. `npm run lint`, `npm run build` and Ruff passed. Host source ingestion fetched all 11 configured official URLs; the three PDF embedded-text extractions were rejected as unusable Kannada and retained as raw PDFs. BGE M3 and bge-reranker-v2-m3 were measured on 12 author-generated development questions; see [research results](RESEARCH_PROTOTYPE.md) and `data/research/evaluation.json`. No independently reviewed real eligibility rule or genuine applicant document was evaluated.
+
+---

@@ -1,0 +1,22 @@
+{
+  "source": {
+    "id": "dssp-ssy-2021",
+    "url": "https://dssp.karnataka.gov.in/dssp/documents/SSY_PHP_DWP.pdf",
+    "title": "Sandhya Suraksha order 31 July 2021",
+    "department": "Revenue Department",
+    "scheme_id": "ka-sandhya",
+    "language": "kn",
+    "type": "pdf",
+    "publication_date": "2021-07-31",
+    "retrieved_at": "2026-11-23T18:01:59.894578+00:00",
+    "source_version": "e886ca211faf",
+    "content_hash": "e886ca211fafef09ab834daa025c98377669adbb96f5f6d64ed5b7938766c333",
+    "effective_date": null,
+    "raw_path": "raw/e886ca211fafef09ab834daa025c98377669adbb96f5f6d64ed5b7938766c333.pdf",
+    "content_type": "application/pdf",
+    "status": "fetched",
+    "extraction_note": "Embedded text is not usable Kannada; PDF retained for independent OCR and review",
+    "passage_count": 0
+  },
+  "passages": []
+}

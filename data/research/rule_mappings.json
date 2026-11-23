@@ -1,0 +1,28 @@
+{
+  "version": "2026-11-23-draft-1",
+  "review_status": "machine-assisted draft, pending independent government-order and human review; not activated",
+  "effective_from": null,
+  "groups": [
+    {"scheme_id":"ka-ignoaps","logic":"AND","conditions":[
+      {"id":"age","fact":"age","operator":"gte","value":60,"unit":"years","passages":["dssp-ignoaps:141825819c44:4"],"evidence_types":["age_proof"]},
+      {"id":"bpl","fact":"bpl","operator":"eq","value":true,"unit":"boolean","passages":["dssp-ignoaps:141825819c44:4"],"evidence_types":["bpl_certificate"]},
+      {"id":"income","fact":"annual_income","operator":"lt","value":32000,"unit":"INR/year","passages":["dssp-ignoaps:141825819c44:6"],"evidence_types":["income"]},
+      {"id":"other_pension","fact":"existing_pension","operator":"eq","value":false,"unit":"boolean","passages":["dssp-ignoaps:141825819c44:8"],"evidence_types":["pension_record"]}
+    ],"unsupported_criteria":["Whether linked orders change these conditions","How to verify BPL and pension exclusion from accepted documents"]},
+    {"scheme_id":"ka-sandhya","logic":"AND","conditions":[
+      {"id":"age","fact":"age","operator":"gte","value":65,"unit":"years","passages":["dssp-sandhya:28ceedeef059:1"],"evidence_types":["age_proof"]},
+      {"id":"occupation","fact":"occupation","operator":"in","value":["small_farmer","marginal_farmer","agricultural_labourer","weaver","fisher","unorganised_worker"],"unit":"category","passages":["dssp-sandhya:28ceedeef059:3","dssp-sandhya:28ceedeef059:5","dssp-sandhya:28ceedeef059:7","dssp-sandhya:28ceedeef059:11","dssp-sandhya:28ceedeef059:13"],"evidence_types":[]},
+      {"id":"combined_income","fact":"combined_spousal_income","operator":"lte","value":32000,"unit":"INR/year","passages":["dssp-sandhya:28ceedeef059:16"],"evidence_types":["income"]},
+      {"id":"combined_deposits","fact":"combined_spousal_deposits","operator":"lte","value":10000,"unit":"INR","passages":["dssp-sandhya:28ceedeef059:18"],"evidence_types":[]},
+      {"id":"other_pension","fact":"existing_pension","operator":"eq","value":false,"unit":"boolean","passages":["dssp-sandhya:28ceedeef059:20"],"evidence_types":["pension_record"]},
+      {"id":"construction_exclusion","fact":"covered_construction_worker","operator":"eq","value":false,"unit":"boolean","passages":["dssp-sandhya:28ceedeef059:13"],"evidence_types":[]}
+    ],"unsupported_criteria":["Occupation evidence mapping","Deposits and construction-worker evidence mapping","Interpretation of linked 2021 order"]},
+    {"scheme_id":"ka-widow","logic":"AND","conditions":[
+      {"id":"age","fact":"age","operator":"range","value":[18,64],"unit":"years","passages":["dssp-widow:455018413079:1"],"evidence_types":["age_proof"]},
+      {"id":"bpl","fact":"bpl","operator":"eq","value":true,"unit":"boolean","passages":["dssp-widow:455018413079:1"],"evidence_types":["bpl_certificate"]},
+      {"id":"widowhood","fact":"widowed","operator":"eq","value":true,"unit":"boolean","passages":["dssp-widow:455018413079:4"],"evidence_types":[]},
+      {"id":"income","fact":"annual_income","operator":"lt","value":32000,"unit":"INR/year","passages":["dssp-widow:455018413079:6"],"evidence_types":["income"]},
+      {"id":"remarriage","fact":"remarried","operator":"eq","value":false,"unit":"boolean","passages":["dssp-widow:455018413079:8"],"evidence_types":[]}
+    ],"unsupported_criteria":["Widowhood and remarriage evidence mapping","Linked order supersession review"]}
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "version": "2026-11-23-v1",
+  "review_status": "author-generated development probes; not independent reviewed ground truth",
+  "split": "development",
+  "cases": [
+    {"id":"sandhya-age-en","question":"What is the age requirement for Sandhya Suraksha?","scheme_id":"ka-sandhya","relevant":["field:ka-sandhya:eligibility:0"]},
+    {"id":"sandhya-age-kn","question":"ಸಂಧ್ಯಾ ಸುರಕ್ಷಾ ಯೋಜನೆಗೆ ವಯಸ್ಸು ಎಷ್ಟು?","scheme_id":"ka-sandhya","relevant":["dssp-sandhya:28ceedeef059:1"]},
+    {"id":"sandhya-income-en","question":"What is the combined income limit for Sandhya Suraksha?","scheme_id":"ka-sandhya","relevant":["field:ka-sandhya:eligibility:2"]},
+    {"id":"sandhya-income-kn","question":"ಸಂಧ್ಯಾ ಸುರಕ್ಷಾ ಯೋಜನೆಗೆ ಆದಾಯ ಮಿತಿ ಎಷ್ಟು?","scheme_id":"ka-sandhya","relevant":["dssp-sandhya:28ceedeef059:16"]},
+    {"id":"ignoaps-documents-en","question":"Which documents are needed for old age pension application?","scheme_id":"ka-ignoaps","relevant":["field:ka-ignoaps:application_documents:0","field:ka-ignoaps:application_documents:1","field:ka-ignoaps:application_documents:2","field:ka-ignoaps:application_documents:3"]},
+    {"id":"ignoaps-documents-kn","question":"ವೃದ್ಧಾಪ್ಯ ಪಿಂಚಣಿ ಅರ್ಜಿಗೆ ಯಾವ ದಾಖಲೆಗಳು ಬೇಕು?","scheme_id":"ka-ignoaps","relevant":["dssp-ignoaps:141825819c44:15","dssp-ignoaps:141825819c44:17","dssp-ignoaps:141825819c44:19","dssp-ignoaps:141825819c44:21"]},
+    {"id":"widow-remarriage-en","question":"Does widow pension stop after remarriage?","scheme_id":"ka-widow","relevant":["field:ka-widow:exceptions:0"]},
+    {"id":"widow-income-kn","question":"ವಿಧವಾ ವೇತನ ಯೋಜನೆಗೆ ವಾರ್ಷಿಕ ಆದಾಯ ಮಿತಿ ಎಷ್ಟು?","scheme_id":"ka-widow","relevant":["dssp-widow:455018413079:6"]},
+    {"id":"ignoaps-age-en","question":"How old must an applicant be for the national old age pension?","scheme_id":"ka-ignoaps","relevant":["field:ka-ignoaps:eligibility:0"]},
+    {"id":"sandhya-benefit-kn","question":"ಸಂಧ್ಯಾ ಸುರಕ್ಷಾ ಯೋಜನೆ ಪಿಂಚಣಿ ಮೊತ್ತ ಎಷ್ಟು?","scheme_id":"ka-sandhya","relevant":["dssp-sandhya:28ceedeef059:34"]},
+    {"id":"sandhya-deposit-en","question":"Is there a deposit limit for Sandhya Suraksha?","scheme_id":"ka-sandhya","relevant":["field:ka-sandhya:eligibility:3"]},
+    {"id":"widow-apply-kn","question":"ವಿಧವಾ ವೇತನಕ್ಕೆ ಅರ್ಜಿ ಎಲ್ಲಿ ಸಲ್ಲಿಸಬೇಕು?","scheme_id":"ka-widow","relevant":["dssp-widow:455018413079:19"]}
+  ]
+}

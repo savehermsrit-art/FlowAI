@@ -1,0 +1,3 @@
+# Optional multilingual dense retrieval and cross-encoder reranking.
+# The base Docker image intentionally remains small and keyword-capable.
+sentence-transformers>=5,<6

@@ -1,0 +1,289 @@
+[
+  {
+    "department": "Directorate of Social Security and Pensions, Revenue Department",
+    "review_status": "pending independent rule and order review",
+    "assessment_enabled": false,
+    "source_version_policy": "Web page and listed orders need independent comparison before activation",
+    "id": "ka-ignoaps",
+    "name": "Indira Gandhi National Old Age Pension Scheme",
+    "name_kn": "ಇಂದಿರಾ ಗಾಂಧಿ ರಾಷ್ಟ್ರೀಯ ವೃದ್ಧಾಪ್ಯ ವೇತನ ಯೋಜನೆ",
+    "primary_url": "https://dssp.karnataka.gov.in/dssp/IndiraGandhiPension.aspx",
+    "eligibility": [
+      {
+        "value": "Age 60 years or older",
+        "passages": [
+          "dssp-ignoaps:141825819c44:4"
+        ]
+      },
+      {
+        "value": "Below poverty line (BPL)",
+        "passages": [
+          "dssp-ignoaps:141825819c44:4"
+        ]
+      },
+      {
+        "value": "Annual income below ₹32,000",
+        "passages": [
+          "dssp-ignoaps:141825819c44:6"
+        ]
+      },
+      {
+        "value": "Must not receive another public or private pension, including widow, disability or Sandhya Suraksha pension",
+        "passages": [
+          "dssp-ignoaps:141825819c44:8"
+        ]
+      }
+    ],
+    "exceptions": [
+      {
+        "value": "Having adult sons does not exclude a person if they do not support the applicant",
+        "passages": [
+          "dssp-ignoaps:141825819c44:10"
+        ]
+      }
+    ],
+    "benefits": [
+      {
+        "value": "The page lists ₹600 for ages 60–64 and ₹1,200 for ages 65 and above; current applicability needs order review",
+        "passages": [
+          "dssp-ignoaps:141825819c44:24",
+          "dssp-ignoaps:141825819c44:27"
+        ]
+      }
+    ],
+    "application_documents": [
+      {
+        "value": "Residence certificate",
+        "passages": [
+          "dssp-ignoaps:141825819c44:15"
+        ]
+      },
+      {
+        "value": "Proof of age",
+        "passages": [
+          "dssp-ignoaps:141825819c44:17"
+        ]
+      },
+      {
+        "value": "Bank or postal account details",
+        "passages": [
+          "dssp-ignoaps:141825819c44:19"
+        ]
+      },
+      {
+        "value": "Aadhaar card",
+        "passages": [
+          "dssp-ignoaps:141825819c44:21"
+        ]
+      }
+    ],
+    "application": [
+      {
+        "value": "Apply through the Atalji Janasnehi Kendra for the applicant's place of residence",
+        "passages": [
+          "dssp-ignoaps:141825819c44:29"
+        ]
+      }
+    ],
+    "unresolved": [
+      "Effective date and supersession of all eligibility clauses need review against linked orders",
+      "BPL determination and pension exclusion are not supported by the current OCR fact schema"
+    ]
+  },
+  {
+    "department": "Directorate of Social Security and Pensions, Revenue Department",
+    "review_status": "pending independent rule and order review",
+    "assessment_enabled": false,
+    "source_version_policy": "Web page and listed orders need independent comparison before activation",
+    "id": "ka-sandhya",
+    "name": "Sandhya Suraksha Yojana",
+    "name_kn": "ಸಂಧ್ಯಾ ಸುರಕ್ಷಾ ಯೋಜನೆ",
+    "primary_url": "https://dssp.karnataka.gov.in/dssp/Sandhya_Suraksha.aspx",
+    "eligibility": [
+      {
+        "value": "Age 65 years or older",
+        "passages": [
+          "dssp-sandhya:28ceedeef059:1"
+        ]
+      },
+      {
+        "value": "Applicant is in one of the listed occupations: small or marginal farmer, agricultural labourer, weaver, fisher or unorganised worker",
+        "passages": [
+          "dssp-sandhya:28ceedeef059:3",
+          "dssp-sandhya:28ceedeef059:5",
+          "dssp-sandhya:28ceedeef059:7",
+          "dssp-sandhya:28ceedeef059:11",
+          "dssp-sandhya:28ceedeef059:13"
+        ]
+      },
+      {
+        "value": "Combined annual income of applicant and spouse must not exceed ₹32,000",
+        "passages": [
+          "dssp-sandhya:28ceedeef059:16"
+        ]
+      },
+      {
+        "value": "Combined deposits of applicant and spouse must not exceed ₹10,000",
+        "passages": [
+          "dssp-sandhya:28ceedeef059:18"
+        ]
+      },
+      {
+        "value": "No pension from a public or private source",
+        "passages": [
+          "dssp-sandhya:28ceedeef059:20"
+        ]
+      }
+    ],
+    "exceptions": [
+      {
+        "value": "Certain construction workers and those receiving pension under the cited construction-workers law are excluded",
+        "passages": [
+          "dssp-sandhya:28ceedeef059:13"
+        ]
+      },
+      {
+        "value": "Sons who do not support the applicant do not automatically exclude the applicant",
+        "passages": [
+          "dssp-sandhya:28ceedeef059:22"
+        ]
+      }
+    ],
+    "benefits": [
+      {
+        "value": "The page lists a pension amount of ₹1,200; current applicability needs order review",
+        "passages": [
+          "dssp-sandhya:28ceedeef059:34"
+        ]
+      }
+    ],
+    "application_documents": [
+      {
+        "value": "Residence certificate",
+        "passages": [
+          "dssp-sandhya:28ceedeef059:25"
+        ]
+      },
+      {
+        "value": "Proof of age",
+        "passages": [
+          "dssp-sandhya:28ceedeef059:27"
+        ]
+      },
+      {
+        "value": "Bank or postal account details",
+        "passages": [
+          "dssp-sandhya:28ceedeef059:29"
+        ]
+      },
+      {
+        "value": "Aadhaar card",
+        "passages": [
+          "dssp-sandhya:28ceedeef059:31"
+        ]
+      },
+      {
+        "value": "Ration card number",
+        "passages": [
+          "dssp-sandhya:28ceedeef059:33"
+        ]
+      }
+    ],
+    "application": [
+      {
+        "value": "Apply through the Atalji Janasnehi Kendra for the applicant's place of residence",
+        "passages": [
+          "dssp-sandhya:28ceedeef059:35"
+        ]
+      }
+    ],
+    "unresolved": [
+      "The 2021 government order is archived but its Kannada text extraction is unusable; independent review needed",
+      "Occupation, combined deposits and pension exclusions are not supported by current OCR fact schema"
+    ]
+  },
+  {
+    "department": "Directorate of Social Security and Pensions, Revenue Department",
+    "review_status": "pending independent rule and order review",
+    "assessment_enabled": false,
+    "source_version_policy": "Web page and listed orders need independent comparison before activation",
+    "id": "ka-widow",
+    "name": "Widow Pension Scheme",
+    "name_kn": "ವಿಧವಾ ವೇತನ ಯೋಜನೆ",
+    "primary_url": "https://dssp.karnataka.gov.in/dssp/Widow_Scheme.aspx",
+    "eligibility": [
+      {
+        "value": "Widow aged 18 to 64 and below poverty line",
+        "passages": [
+          "dssp-widow:455018413079:1"
+        ]
+      },
+      {
+        "value": "Annual income below ₹32,000",
+        "passages": [
+          "dssp-widow:455018413079:6"
+        ]
+      },
+      {
+        "value": "Widowhood as described on the official page",
+        "passages": [
+          "dssp-widow:455018413079:4"
+        ]
+      }
+    ],
+    "exceptions": [
+      {
+        "value": "Pension ceases on remarriage or on employment with income above the prescribed annual limit",
+        "passages": [
+          "dssp-widow:455018413079:8"
+        ]
+      }
+    ],
+    "benefits": [
+      {
+        "value": "The page lists a pension amount of ₹800; current applicability needs order review",
+        "passages": [
+          "dssp-widow:455018413079:18"
+        ]
+      }
+    ],
+    "application_documents": [
+      {
+        "value": "Residence certificate",
+        "passages": [
+          "dssp-widow:455018413079:11"
+        ]
+      },
+      {
+        "value": "Proof of age",
+        "passages": [
+          "dssp-widow:455018413079:13"
+        ]
+      },
+      {
+        "value": "Bank or postal account details",
+        "passages": [
+          "dssp-widow:455018413079:15"
+        ]
+      },
+      {
+        "value": "Aadhaar card",
+        "passages": [
+          "dssp-widow:455018413079:17"
+        ]
+      }
+    ],
+    "application": [
+      {
+        "value": "Apply through the Atalji Janasnehi Kendra for the applicant's place of residence",
+        "passages": [
+          "dssp-widow:455018413079:19"
+        ]
+      }
+    ],
+    "unresolved": [
+      "Linked government orders and current supersession need independent review",
+      "Widowhood, remarriage and BPL status are not supported by current OCR fact schema"
+    ]
+  }
+]

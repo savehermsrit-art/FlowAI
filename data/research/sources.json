@@ -1,0 +1,13 @@
+[
+  {"id":"chitradurga-ssp","url":"https://chitradurga.nic.in/en/scheme/ssp-en/","title":"Social Security and Various Pensions","department":"Revenue Department","scheme_id":null,"language":"en","type":"html"},
+  {"id":"vijayapura-pensions","url":"https://vijayapura.nic.in/en/service/social-security-pensions/","title":"Social Security & Pensions","department":"Directorate of Social Security and Pensions","scheme_id":null,"language":"en","type":"html"},
+  {"id":"dssp-home","url":"https://dssp.karnataka.gov.in/dssp/","title":"Directorate of Social Security and Pensions","department":"Revenue Department","scheme_id":null,"language":"kn","type":"html"},
+  {"id":"dssp-ignoaps","url":"https://dssp.karnataka.gov.in/dssp/IndiraGandhiPension.aspx","title":"Indira Gandhi National Old Age Pension Scheme","department":"Directorate of Social Security and Pensions","scheme_id":"ka-ignoaps","language":"kn","type":"html"},
+  {"id":"dssp-sandhya","url":"https://dssp.karnataka.gov.in/dssp/Sandhya_Suraksha.aspx","title":"Sandhya Suraksha Yojana","department":"Directorate of Social Security and Pensions","scheme_id":"ka-sandhya","language":"kn","type":"html"},
+  {"id":"dssp-widow","url":"https://dssp.karnataka.gov.in/dssp/Widow_Scheme.aspx","title":"Widow Pension Scheme","department":"Directorate of Social Security and Pensions","scheme_id":"ka-widow","language":"kn","type":"html"},
+  {"id":"dssp-oap-orders","url":"https://dssp.karnataka.gov.in/dssp/OAP_Orders.aspx","title":"Old Age Pension Government Orders","department":"Directorate of Social Security and Pensions","scheme_id":"ka-ignoaps","language":"kn","type":"html"},
+  {"id":"dssp-ssy-orders","url":"https://dssp.karnataka.gov.in/dssp/SSY_Orders.aspx","title":"Sandhya Suraksha Government Orders","department":"Directorate of Social Security and Pensions","scheme_id":"ka-sandhya","language":"kn","type":"html"},
+  {"id":"dssp-income-order","url":"https://dssp.karnataka.gov.in/dssp/documents/Income%20limit%20Rs.32000%20Government%20Order_DS_S%20P-MIS_C-05_2020%2010.02.2021.pdf","title":"Income limit Rs 32000 order 10 February 2021","department":"Revenue Department","scheme_id":null,"language":"kn","type":"pdf","publication_date":"2021-02-10"},
+  {"id":"dssp-oap-2021","url":"https://dssp.karnataka.gov.in/dssp/documents/OAP_1000_1200.pdf","title":"Old Age Pension order 18 September 2021","department":"Revenue Department","scheme_id":"ka-ignoaps","language":"kn","type":"pdf","publication_date":"2021-09-18"},
+  {"id":"dssp-ssy-2021","url":"https://dssp.karnataka.gov.in/dssp/documents/SSY_PHP_DWP.pdf","title":"Sandhya Suraksha order 31 July 2021","department":"Revenue Department","scheme_id":"ka-sandhya","language":"kn","type":"pdf","publication_date":"2021-07-31"}
+]

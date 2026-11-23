@@ -1,8 +1,12 @@
 # FormFlow AI
 
-A locally hosted, bilingual, evidence-aware welfare discovery and preliminary assessment application for Karnataka senior citizens. **The working assessment experience uses fictional DEMO schemes. Real schemes are discovery references only and cannot be assessed or published in this build.** Results are not government decisions or document authentication.
+## Research prototype update · 23 November 2026
 
-The application was implemented directly in this folder. No Git commands, repository creation, pushes, pull requests or cloud deployments are part of the workflow.
+The project now includes an archived 11-source Karnataka government corpus, three source-linked scheme cards, English/Kannada cited question answering, optional BGE M3 hybrid retrieval and reranking, draft rule mappings, exact missing-evidence set cover, and source-change impact flags. See [the research implementation and measured results](docs/RESEARCH_PROTOTYPE.md). **Personal eligibility assessment still uses fictional demo schemes.** Real schemes require independent review of government orders, complete evidence mappings and approved rule versions before activation. The default Docker image serves keyword-backed cited guidance; optional BGE model runs were measured on the host. The full Compose stack and nine browser journeys were verified on 23 November 2026.
+
+A locally hosted, bilingual, evidence-aware welfare discovery and preliminary assessment application for Karnataka senior citizens. **The working assessment experience uses fictional DEMO schemes. Real scheme cards and cited guidance are available for research but cannot be assessed or published in this build.** Results are not government decisions or document authentication.
+
+The research upgrade is implemented on the `codex/research-prototype` branch. The original demonstration workflow remains available.
 
 ## Start on this computer
 
@@ -124,7 +128,7 @@ The MinIO public images were unavailable during implementation. `infrastructure/
 
 ## Architecture and limits
 
-Next.js/React/TypeScript/Tailwind frontend → FastAPI/Pydantic → SQLAlchemy/PostgreSQL 16. Alembic owns schema initialization. PostgreSQL full-text search indexes stable source clauses; pgvector is installed but no embedding model is configured. Redis transports document IDs to Celery. MinIO stores encrypted document objects. Local Tesseract has `eng` and `kan`; PyMuPDF extracts embedded PDF text and shapes Kannada reports.
+Next.js/React/TypeScript/Tailwind frontend → FastAPI/Pydantic → SQLAlchemy/PostgreSQL 16. Alembic owns schema initialization. PostgreSQL full-text search indexes stable source clauses; pgvector is installed but the research path uses an in-process Unicode keyword index and optional dense matrix for the small archive. The default Docker image has no embedding model. Redis transports document IDs to Celery. MinIO stores encrypted document objects. Local Tesseract has `eng` and `kan`; PyMuPDF extracts embedded PDF text and shapes Kannada reports.
 
 The pure `backend/app/rules.py` evaluator accepts only explicit facts, a validated immutable rule and an evaluation date. It has no database, network, system-clock, LLM or random dependency. Conditions support equality/inequality, ordered comparisons, membership, ranges and existence; nested AND/OR/NOT use Kleene truth tables. Provenance and reasons remain attached to each condition. Result ranking is deterministic.
 
@@ -132,9 +136,9 @@ Evidence extraction is deliberately conservative and currently recognizes labele
 
 Malware scanning is unavailable. File signatures, parsing limits, active-PDF rejection, image limits, role/ownership checks, CSRF header/origin checks, rate limiting and local encryption are implemented. Setting `DEVELOPMENT=false` refuses startup rather than pretending an unscanned production mode is safe. Rate limiting is process-local and the supported API configuration is a single process.
 
-Ollama, learned OCR alternatives, embeddings, speech input and cloud services are not required or enabled. Bilingual deterministic explanations are the working path; the structured explanation validator rejects changed verdicts/thresholds/references. No external LLM integration exists. Human caseworker agreement, legal compliance, government authentication and population-level accuracy have not been established. Source fetching may fail due to remote access restrictions and records errors without bypassing them.
+Ollama, learned OCR alternatives, speech input and cloud services are not required or enabled. Optional BGE embeddings and reranking were measured on the host; the Compose default is keyword retrieval. Bilingual deterministic explanations are the working assessment path; the structured explanation validator rejects changed verdicts/thresholds/references. No external LLM integration exists. Human caseworker agreement, legal compliance, government authentication and population-level accuracy have not been established. Source fetching may fail due to remote access restrictions and records errors without bypassing them.
 
-Known official discovery references are the [Vijayapura district pension page](https://vijayapura.nic.in/en/service/social-security-pensions/) and [Chitradurga district scheme page](https://chitradurga.nic.in/en/scheme/ssp-en/). Listing a source is not approval of a complete eligibility rule. No benefit amounts, deadlines or unsourced real thresholds are presented.
+The archive now includes the [Vijayapura district pension page](https://vijayapura.nic.in/en/service/social-security-pensions/), [Chitradurga district scheme page](https://chitradurga.nic.in/en/scheme/ssp-en/) and Directorate scheme pages and orders. Source-linked page statements, including benefit amounts, are shown with a pending-review label; they are not approved current benefit determinations. No unsourced threshold is presented.
 
 After the local demonstration is stable, the substantive next steps are independent review of full official scheme conditions, representative consented OCR validation, stronger certificate-layout handling, a local malware scanner, production authentication and legal/security review before real citizen data. Additional states and categories are outside this build's initial scope.
 

@@ -1,0 +1,330 @@
+{
+  "dataset": "52 synthetic fact-level cases; language labels are strata, NOT OCR measurements",
+  "count": 52,
+  "scheme_accuracy": 1.0,
+  "condition_accuracy": 1.0,
+  "checklist_precision": 1.0,
+  "checklist_recall": 1.0,
+  "incorrect_positive": 0,
+  "incorrect_negative": 0,
+  "duplicate_requests": 0,
+  "explanation_validator_pass_rate": 1.0,
+  "citation_correctness": 1.0,
+  "template_fallback_frequency": 1.0,
+  "human_agreement": null,
+  "ocr_metrics": "Separate executable OCR benchmark; not inferred from fact-level tests",
+  "cases": [
+    {
+      "id": "english_clear:eligible",
+      "expected": "LIKELY_ELIGIBLE",
+      "actual": "LIKELY_ELIGIBLE",
+      "passed": true
+    },
+    {
+      "id": "english_clear:age_boundary",
+      "expected": "LIKELY_ELIGIBLE",
+      "actual": "LIKELY_ELIGIBLE",
+      "passed": true
+    },
+    {
+      "id": "english_clear:income_boundary",
+      "expected": "LIKELY_ELIGIBLE",
+      "actual": "LIKELY_ELIGIBLE",
+      "passed": true
+    },
+    {
+      "id": "english_clear:under_age",
+      "expected": "NOT_ELIGIBLE",
+      "actual": "NOT_ELIGIBLE",
+      "passed": true
+    },
+    {
+      "id": "english_clear:over_income",
+      "expected": "NOT_ELIGIBLE",
+      "actual": "NOT_ELIGIBLE",
+      "passed": true
+    },
+    {
+      "id": "english_clear:other_state",
+      "expected": "NOT_ELIGIBLE",
+      "actual": "NOT_ELIGIBLE",
+      "passed": true
+    },
+    {
+      "id": "english_clear:missing_income",
+      "expected": "NEEDS_EVIDENCE",
+      "actual": "NEEDS_EVIDENCE",
+      "passed": true
+    },
+    {
+      "id": "english_clear:no_evidence",
+      "expected": "NEEDS_EVIDENCE",
+      "actual": "NEEDS_EVIDENCE",
+      "passed": true
+    },
+    {
+      "id": "english_clear:conflict",
+      "expected": "NEEDS_EVIDENCE",
+      "actual": "NEEDS_EVIDENCE",
+      "passed": true
+    },
+    {
+      "id": "english_clear:unconfirmed",
+      "expected": "NEEDS_EVIDENCE",
+      "actual": "NEEDS_EVIDENCE",
+      "passed": true
+    },
+    {
+      "id": "english_clear:incorrect_ocr_correction",
+      "expected": "NEEDS_EVIDENCE",
+      "actual": "NEEDS_EVIDENCE",
+      "passed": true
+    },
+    {
+      "id": "english_clear:blurred",
+      "expected": "NEEDS_EVIDENCE",
+      "actual": "NEEDS_EVIDENCE",
+      "passed": true
+    },
+    {
+      "id": "english_clear:expired",
+      "expected": "NEEDS_EVIDENCE",
+      "actual": "NEEDS_EVIDENCE",
+      "passed": true
+    },
+    {
+      "id": "kannada:eligible",
+      "expected": "LIKELY_ELIGIBLE",
+      "actual": "LIKELY_ELIGIBLE",
+      "passed": true
+    },
+    {
+      "id": "kannada:age_boundary",
+      "expected": "LIKELY_ELIGIBLE",
+      "actual": "LIKELY_ELIGIBLE",
+      "passed": true
+    },
+    {
+      "id": "kannada:income_boundary",
+      "expected": "LIKELY_ELIGIBLE",
+      "actual": "LIKELY_ELIGIBLE",
+      "passed": true
+    },
+    {
+      "id": "kannada:under_age",
+      "expected": "NOT_ELIGIBLE",
+      "actual": "NOT_ELIGIBLE",
+      "passed": true
+    },
+    {
+      "id": "kannada:over_income",
+      "expected": "NOT_ELIGIBLE",
+      "actual": "NOT_ELIGIBLE",
+      "passed": true
+    },
+    {
+      "id": "kannada:other_state",
+      "expected": "NOT_ELIGIBLE",
+      "actual": "NOT_ELIGIBLE",
+      "passed": true
+    },
+    {
+      "id": "kannada:missing_income",
+      "expected": "NEEDS_EVIDENCE",
+      "actual": "NEEDS_EVIDENCE",
+      "passed": true
+    },
+    {
+      "id": "kannada:no_evidence",
+      "expected": "NEEDS_EVIDENCE",
+      "actual": "NEEDS_EVIDENCE",
+      "passed": true
+    },
+    {
+      "id": "kannada:conflict",
+      "expected": "NEEDS_EVIDENCE",
+      "actual": "NEEDS_EVIDENCE",
+      "passed": true
+    },
+    {
+      "id": "kannada:unconfirmed",
+      "expected": "NEEDS_EVIDENCE",
+      "actual": "NEEDS_EVIDENCE",
+      "passed": true
+    },
+    {
+      "id": "kannada:incorrect_ocr_correction",
+      "expected": "NEEDS_EVIDENCE",
+      "actual": "NEEDS_EVIDENCE",
+      "passed": true
+    },
+    {
+      "id": "kannada:blurred",
+      "expected": "NEEDS_EVIDENCE",
+      "actual": "NEEDS_EVIDENCE",
+      "passed": true
+    },
+    {
+      "id": "kannada:expired",
+      "expected": "NEEDS_EVIDENCE",
+      "actual": "NEEDS_EVIDENCE",
+      "passed": true
+    },
+    {
+      "id": "mixed:eligible",
+      "expected": "LIKELY_ELIGIBLE",
+      "actual": "LIKELY_ELIGIBLE",
+      "passed": true
+    },
+    {
+      "id": "mixed:age_boundary",
+      "expected": "LIKELY_ELIGIBLE",
+      "actual": "LIKELY_ELIGIBLE",
+      "passed": true
+    },
+    {
+      "id": "mixed:income_boundary",
+      "expected": "LIKELY_ELIGIBLE",
+      "actual": "LIKELY_ELIGIBLE",
+      "passed": true
+    },
+    {
+      "id": "mixed:under_age",
+      "expected": "NOT_ELIGIBLE",
+      "actual": "NOT_ELIGIBLE",
+      "passed": true
+    },
+    {
+      "id": "mixed:over_income",
+      "expected": "NOT_ELIGIBLE",
+      "actual": "NOT_ELIGIBLE",
+      "passed": true
+    },
+    {
+      "id": "mixed:other_state",
+      "expected": "NOT_ELIGIBLE",
+      "actual": "NOT_ELIGIBLE",
+      "passed": true
+    },
+    {
+      "id": "mixed:missing_income",
+      "expected": "NEEDS_EVIDENCE",
+      "actual": "NEEDS_EVIDENCE",
+      "passed": true
+    },
+    {
+      "id": "mixed:no_evidence",
+      "expected": "NEEDS_EVIDENCE",
+      "actual": "NEEDS_EVIDENCE",
+      "passed": true
+    },
+    {
+      "id": "mixed:conflict",
+      "expected": "NEEDS_EVIDENCE",
+      "actual": "NEEDS_EVIDENCE",
+      "passed": true
+    },
+    {
+      "id": "mixed:unconfirmed",
+      "expected": "NEEDS_EVIDENCE",
+      "actual": "NEEDS_EVIDENCE",
+      "passed": true
+    },
+    {
+      "id": "mixed:incorrect_ocr_correction",
+      "expected": "NEEDS_EVIDENCE",
+      "actual": "NEEDS_EVIDENCE",
+      "passed": true
+    },
+    {
+      "id": "mixed:blurred",
+      "expected": "NEEDS_EVIDENCE",
+      "actual": "NEEDS_EVIDENCE",
+      "passed": true
+    },
+    {
+      "id": "mixed:expired",
+      "expected": "NEEDS_EVIDENCE",
+      "actual": "NEEDS_EVIDENCE",
+      "passed": true
+    },
+    {
+      "id": "photo:eligible",
+      "expected": "LIKELY_ELIGIBLE",
+      "actual": "LIKELY_ELIGIBLE",
+      "passed": true
+    },
+    {
+      "id": "photo:age_boundary",
+      "expected": "LIKELY_ELIGIBLE",
+      "actual": "LIKELY_ELIGIBLE",
+      "passed": true
+    },
+    {
+      "id": "photo:income_boundary",
+      "expected": "LIKELY_ELIGIBLE",
+      "actual": "LIKELY_ELIGIBLE",
+      "passed": true
+    },
+    {
+      "id": "photo:under_age",
+      "expected": "NOT_ELIGIBLE",
+      "actual": "NOT_ELIGIBLE",
+      "passed": true
+    },
+    {
+      "id": "photo:over_income",
+      "expected": "NOT_ELIGIBLE",
+      "actual": "NOT_ELIGIBLE",
+      "passed": true
+    },
+    {
+      "id": "photo:other_state",
+      "expected": "NOT_ELIGIBLE",
+      "actual": "NOT_ELIGIBLE",
+      "passed": true
+    },
+    {
+      "id": "photo:missing_income",
+      "expected": "NEEDS_EVIDENCE",
+      "actual": "NEEDS_EVIDENCE",
+      "passed": true
+    },
+    {
+      "id": "photo:no_evidence",
+      "expected": "NEEDS_EVIDENCE",
+      "actual": "NEEDS_EVIDENCE",
+      "passed": true
+    },
+    {
+      "id": "photo:conflict",
+      "expected": "NEEDS_EVIDENCE",
+      "actual": "NEEDS_EVIDENCE",
+      "passed": true
+    },
+    {
+      "id": "photo:unconfirmed",
+      "expected": "NEEDS_EVIDENCE",
+      "actual": "NEEDS_EVIDENCE",
+      "passed": true
+    },
+    {
+      "id": "photo:incorrect_ocr_correction",
+      "expected": "NEEDS_EVIDENCE",
+      "actual": "NEEDS_EVIDENCE",
+      "passed": true
+    },
+    {
+      "id": "photo:blurred",
+      "expected": "NEEDS_EVIDENCE",
+      "actual": "NEEDS_EVIDENCE",
+      "passed": true
+    },
+    {
+      "id": "photo:expired",
+      "expected": "NEEDS_EVIDENCE",
+      "actual": "NEEDS_EVIDENCE",
+      "passed": true
+    }
+  ]
+}
