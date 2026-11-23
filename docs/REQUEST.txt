@@ -1,0 +1,1285 @@
+ROLE AND PRIMARY OBJECTIVE
+Act as an autonomous senior full-stack software engineer, AI/ML engineer, software architect, database engineer, UI/UX designer, security engineer, and quality assurance engineer.
+Your task is to design, implement, integrate, test, debug, and run a complete, functional, locally hosted web application called FormFlow AI.
+FormFlow AI is an intelligent, evidence-aware government welfare scheme discovery and preliminary eligibility assessment platform focused on elderly citizens in Karnataka, India.
+Do not merely generate a project plan, frontend mockup, architecture document, pseudocode, or disconnected modules. Implement the actual working application.
+You are operating inside a local Codex environment with access to the user's selected project folder and permitted terminal commands.
+Carry out the implementation directly in that folder.
+Critical instructions
+All development must occur locally on the user's computer.
+Do not create, initialize, connect, clone, or push to any Git or GitHub repository.
+Do not create pull requests or GitHub Actions workflows.
+Do not deploy the application to Vercel, AWS, Azure, Google Cloud, or any hosting platform.
+Do not require the user to manually create instruction files before starting.
+You must create all application source files, directories, configurations, scripts, tests, and documentation yourself.
+Do not modify or overwrite unrelated existing files.
+Use local services for the database, storage, job processing, OCR, retrieval, and application execution.
+Do not require paid APIs, cloud AI services, or external authentication services for the local demonstration.
+Internet access is permitted for installing development dependencies and fetching publicly available official government scheme documents. Never upload personal documents or private user data to external services.
+Execute the project in logical implementation stages. After each stage, test the functionality and resolve errors before continuing.
+Do not repeatedly ask the user to approve routine implementation decisions. Choose reasonable defaults and document them.
+Only request user intervention when an action requires administrator privileges, credentials, unavailable prerequisites, security-sensitive approval, or an external service.
+Do not claim functionality is complete unless its implementation and tests support that claim.
+Never fabricate government rules, eligibility thresholds, source citations, test results, successful commands, or deployment status.
+If your execution environment is restricted, implement everything you can, clearly report blockers, and provide exact local recovery commands.
+Your responsibility extends from initial scaffolding to a working, testable application.
+
+1. PROJECT IDENTITY
+Project name: FormFlow AI
+Project type: AI-assisted government welfare scheme discovery and preliminary eligibility assessment platform.
+Initial geographic scope: Karnataka, India.
+Primary beneficiaries: Elderly citizens.
+Secondary users: Family members, caregivers, authorized assistance providers, and system administrators.
+Supported languages: Kannada and English.
+Deployment target: Localhost on the user's computer.
+Future expansion: Central government schemes, additional states, and other citizen categories.
+Do not implement these future expansions at the expense of the initial Karnataka elderly-welfare scope.
+1.1 Problem statement
+Elderly citizens in Karnataka often struggle to discover and apply for pension, healthcare, insurance, and financial-assistance schemes. Relevant information is scattered across government websites, circulars, notifications, and application portals. Eligibility conditions may be complex, difficult to interpret, and unavailable in accessible language.
+Many scheme-discovery workflows rely heavily on self-declared answers or generic filtering criteria. They do not consistently provide document-backed preliminary eligibility assessment, condition-level explanations, or personalized guidance about missing evidence.
+Consequently, citizens may struggle to determine which schemes are relevant to them, what evidence they need, and how to prepare an application.
+These difficulties are amplified by limited digital literacy, language barriers, low-quality document scans, and the need for caregiver assistance.
+1.2 Proposed solution
+FormFlow AI provides a unified interface where elderly citizens or authorized caregivers can upload relevant documents, review extracted information, and receive evidence-backed preliminary eligibility assessments for curated Karnataka welfare schemes.
+The system combines:
+Kannada and English OCR.
+Document classification and structured information extraction.
+User confirmation and correction of extracted fields.
+Deterministic rule-based eligibility evaluation.
+Three-valued logic.
+Human-reviewed, version-controlled government scheme rules.
+Retrieval-augmented explanations based on official source documents.
+Missing-document identification.
+Personalized document checklists.
+Ranked scheme recommendations.
+Kannada and English interface.
+Accessible voice-assisted interaction.
+Caregiver-assisted workflows.
+Government-source change monitoring.
+Administrative review and approval.
+Consent, privacy, access controls, and retention management.
+The application must distinguish preliminary guidance from an official government eligibility decision.
+FormFlow AI cannot approve benefits, certify document authenticity, guarantee scheme acceptance, or replace the responsible government department.
+
+2. TECHNOLOGY STACK
+Use the following preferred stack unless the local environment requires a justified alternative.
+Component
+Technology
+Frontend
+Next.js, React, TypeScript
+UI styling
+Tailwind CSS
+Backend
+Python 3.11+ and FastAPI
+Request validation
+Pydantic v2
+Database
+PostgreSQL 16
+ORM
+SQLAlchemy
+Migrations
+Alembic
+Vector search
+pgvector
+Text retrieval
+PostgreSQL full-text search
+Cache and message broker
+Redis
+Background processing
+Celery
+Local object storage
+MinIO
+OCR
+Tesseract with English and Kannada models
+Optional OCR comparison
+PaddleOCR
+Image preprocessing
+OpenCV and Pillow
+PDF extraction
+PyMuPDF or equivalent
+Rule engine
+Custom deterministic Python evaluator
+Retrieval
+Hybrid keyword and semantic search
+Optional local LLM
+Ollama through a provider abstraction
+Backend tests
+pytest
+Frontend tests
+Vitest and React Testing Library
+End-to-end tests
+Playwright
+Service orchestration
+Docker Compose
+Local automation
+PowerShell scripts and cross-platform commands
+
+Use supported, mutually compatible package versions. Do not blindly install obsolete libraries.
+Avoid unnecessary microservices. Prefer maintainable modular architecture.
+The application must remain useful even when an optional local LLM is unavailable.
+
+3. LOCAL DEVELOPMENT REQUIREMENTS
+The primary target environment is Windows with PowerShell and Docker Desktop.
+Support a local project folder such as:
+C:\Projects\FormFlow-AI
+Use the current working directory selected in Codex rather than assuming that exact path.
+3.1 Local services
+Configure Docker Compose to run:
+PostgreSQL with pgvector.
+Redis.
+MinIO.
+Backend API.
+Background worker.
+Frontend application.
+Optional supporting services when justified.
+Suggested local addresses:
+Frontend: http://localhost:3000
+Backend: http://localhost:8000
+API documentation: http://localhost:8000/docs
+MinIO console: a locally configured port.
+Choose non-conflicting ports if defaults are unavailable.
+3.2 Required developer experience
+Automatically create appropriate scripts or commands for:
+Installing dependencies.
+Starting the application.
+Stopping the application.
+Running database migrations.
+Loading demonstration data.
+Running backend tests.
+Running frontend tests.
+Running end-to-end tests.
+Running linting and type checks.
+Resetting local demonstration data.
+Viewing logs.
+Provide Windows-compatible PowerShell scripts such as start.ps1, stop.ps1, and test.ps1 where useful.
+Create .env.example containing clearly documented environment variables.
+Never commit or expose actual secrets.
+Generate secure development credentials locally and keep them outside tracked source files.
+If Docker Desktop, Python, Node.js, Tesseract, or another prerequisite is missing, detect the problem and provide the exact installation instructions.
+Do not claim a service started successfully until it has passed a health check.
+
+4. USER ROLES AND ACCESS CONTROL
+Implement three primary roles.
+4.1 Citizen
+A citizen can:
+Create an account.
+Select English or Kannada.
+Create and manage their profile.
+Read and provide consent.
+Upload documents.
+Review OCR-extracted fields.
+Confirm or correct extracted information.
+Request eligibility assessments.
+View recommended schemes.
+Review eligibility explanations.
+View missing-document checklists.
+Export a preliminary assessment summary.
+Delete their uploaded data.
+4.2 Caregiver
+An authorized caregiver can:
+Create their own account.
+Create or manage an elderly citizen profile with appropriate authorization.
+Upload documents for that profile.
+Assist with confirmation and correction.
+Run eligibility assessments.
+Review results and checklists.
+Ensure strict ownership and authorization checks.
+One caregiver must never access another caregiver's profiles without explicit authorization.
+4.3 Administrator
+An administrator can:
+Manage the curated scheme registry.
+View official source documents.
+Review eligibility rules.
+Review detected government-source changes.
+Inspect proposed rule modifications.
+Approve or reject new rule versions.
+Review validation and test results.
+View audit trails.
+Monitor operational errors without exposing unnecessary personal information.
+Citizen-facing and administrative permissions must be separated.
+For local demonstration, provide a development-only login mechanism without requiring an SMS or email provider.
+If using development OTP, generate a temporary one-time code and expose it only through an explicitly marked local development channel.
+Do not leave a fixed universal OTP or authentication bypass in production configuration.
+
+5. CITIZEN USER EXPERIENCE
+Build a complete, mobile-first user journey.
+Step 1: Landing page
+Create a professional, accessible landing page with:
+FormFlow AI branding.
+A clear explanation of the service.
+Kannada and English language switching.
+Prominent "Find My Schemes" action.
+Caregiver access.
+Privacy notice.
+Explanation that results are preliminary.
+Simple instructions for using the application.
+The website should feel trustworthy, modern, uncluttered, and suitable for elderly users.
+Avoid a generic dashboard full of irrelevant charts.
+Step 2: Account and profile
+Allow the user to create or select an elderly citizen profile.
+Collect only necessary information.
+Support both self-use and caregiver-assisted use.
+Step 3: Consent
+Before uploading documents, show a bilingual consent screen explaining:
+Which data is collected.
+Why it is collected.
+How it is processed.
+How long it is retained.
+Whether external AI processing occurs.
+How to withdraw consent.
+How to delete stored information.
+That the result is preliminary guidance.
+The user must explicitly consent before document processing.
+Record the notice version, time, profile, purpose, and consent status.
+Consent must not be implied merely by continuing to the next page.
+Step 4: Document upload
+Support:
+PDF.
+JPEG.
+PNG.
+Mobile camera capture.
+Multiple documents.
+English documents.
+Kannada documents.
+Mixed-language documents.
+Show supported document categories and upload instructions.
+Provide helpful feedback for unreadable, blurred, incomplete, or unsupported files.
+Display actual upload and processing status.
+Step 5: OCR and field confirmation
+Display extracted information beside the supporting document region where feasible.
+Allow the user to:
+Confirm a field.
+Correct an inaccurate field.
+Mark a field as unreadable.
+Remove an incorrect extraction.
+Upload a replacement document.
+Never silently overwrite the original extracted value.
+Store the original extraction and corrected value separately for auditability.
+A user's correction is not equivalent to independent verification of the source document.
+Step 6: Preliminary eligibility evaluation
+Allow the user to request an assessment using the currently available facts and approved rule versions.
+Display the evaluation date.
+Step 7: Results
+Display:
+Matching schemes.
+Preliminary eligibility status.
+Each eligibility condition.
+Evidence used.
+Missing evidence.
+Relevant official source clauses.
+Clear explanations.
+Recommended next steps.
+Official application instructions or verified links.
+Step 8: Personalized checklist
+Generate a downloadable, understandable document checklist.
+Group items into:
+Evidence already provided.
+Evidence still required.
+Documents needing clarification.
+Conflicting or outdated documents.
+Additional application documents.
+Do not confuse eligibility evidence with documents needed for final application submission.
+Step 9: Export and deletion
+Allow users to export a clearly labeled preliminary assessment report.
+Provide a straightforward option to delete their personal data.
+
+6. DOCUMENT PROCESSING PIPELINE
+Implement a modular pipeline.
+The pipeline must support testable replacement of individual OCR and extraction components.
+6.1 Upload security
+Before processing:
+Check user authorization and consent.
+Validate file type using content inspection, not just filename.
+Enforce configurable file-size and page-count limits.
+Reject malicious or malformed files.
+Use safe file identifiers and storage keys.
+Prevent path traversal.
+Protect uploads against unauthorized access.
+Store documents using encrypted local storage.
+Apply configurable retention deadlines.
+Implement local malware scanning if a suitable scanner is available. If unavailable, make the limitation explicit and fail safely for non-development use.
+6.2 Image quality assessment
+Assess:
+Blur.
+Resolution.
+Brightness.
+Skew.
+Rotation.
+Cropping.
+Readability.
+Provide bilingual retake instructions when necessary.
+6.3 Preprocessing
+Implement appropriate preprocessing such as:
+Deskewing.
+Denoising.
+Rotation correction.
+Contrast adjustment.
+Perspective correction.
+Preserve the original document for the authorized retention period.
+6.4 Document classification
+Support initial document categories:
+Age proof.
+Income certificate.
+Residence or domicile evidence.
+Identity document.
+Disability certificate.
+Pension-related document.
+Other supporting evidence.
+Start with deterministic keyword and layout methods.
+Allow later integration of a learned classifier.
+Do not claim classification accuracy without measurement.
+6.5 OCR
+Create an OcrEngine interface.
+Implement a Tesseract adapter supporting Kannada and English.
+OCR output should include:
+Extracted text.
+Page number.
+Bounding boxes.
+Confidence scores.
+Language metadata when available.
+Provide an optional PaddleOCR adapter only when the required model and Kannada compatibility have been verified.
+Do not delay the functional MVP for optional OCR engines.
+6.6 Structured extraction
+Extract relevant fields, such as:
+Date of birth.
+Age derived from date of birth.
+Annual income.
+State of residence.
+District.
+Disability percentage.
+Disability type.
+BPL status where supported.
+Existing pension status.
+Document issue date.
+Issuing authority.
+Document identifiers, masked where required.
+Use document-specific extraction rules and schema validation.
+An optional local LLM may assist with extraction, but its output must never become trusted evidence without validation and appropriate confirmation.
+6.7 Evidence provenance
+Store the relationship between:
+Extracted fact.
+Original document.
+Page.
+Bounding box.
+Extraction method.
+Confidence.
+Original value.
+Normalized value.
+User confirmation or correction.
+Document validation state.
+Support multiple documents providing the same fact.
+Detect conflicting evidence instead of arbitrarily choosing a value.
+6.8 Evidence integrity
+Distinguish:
+Extracted from document.
+Confirmed by user.
+Corrected by user.
+Consistent across documents.
+Unverified.
+Conflicting.
+Expired or outdated.
+Unreadable.
+Never describe OCR as legal or government document authentication.
+If reliable evidence is unavailable, return insufficient evidence rather than inventing values.
+
+7. GOVERNMENT SCHEME KNOWLEDGE BASE
+Build a curated, version-controlled local registry of government schemes.
+7.1 Initial scope
+Prioritize a small selection of Karnataka schemes relevant to elderly citizens, including suitable pension and financial-assistance programs.
+Research official government websites, departmental documents, notifications, and published scheme guidelines when internet access is available.
+Official sources must be distinguished from third-party explanations.
+Never invent scheme names, thresholds, benefit amounts, documents, deadlines, or application links.
+7.2 Rules for real scheme data
+A real scheme must not be published as actionable guidance unless its required eligibility conditions have been sourced, encoded, validated, and approved.
+Record:
+Scheme identifier.
+Official scheme name.
+Department.
+Description.
+Category.
+Applicable geography.
+Official source URL.
+Source document.
+Retrieval timestamp.
+Effective date where known.
+Required conditions.
+Supporting evidence requirements.
+Application documents.
+Verified application channel.
+Rule version.
+Approval status.
+If reliable source information is unavailable, mark the scheme as unavailable for assessment.
+Never substitute guessed eligibility requirements.
+7.3 Demonstration schemes
+To make development and evaluation possible without pretending that incomplete official rules are correct, create clearly labeled synthetic demonstration schemes.
+All demonstration rules, documents, profiles, and results must be explicitly marked as fictional test data.
+Do not use real scheme names with invented eligibility criteria.
+Support separate DEMO and REVIEWED modes.
+The application must work completely in DEMO mode using synthetic examples.
+Reviewed real schemes may be enabled only after their rules pass validation and administrative approval.
+7.4 Scheme document ingestion
+Implement:
+Document ingestion.
+Text extraction.
+Clause-aware chunking.
+Source metadata.
+Stable clause identifiers.
+Language identification.
+Full-text indexing.
+Optional local embeddings.
+Retrieval evaluation.
+Keep source documents locally.
+
+8. DETERMINISTIC ELIGIBILITY RULE ENGINE
+This is the central technical component of FormFlow AI.
+Only this engine may determine eligibility-condition results and aggregate preliminary eligibility verdicts.
+The engine must not depend on:
+An LLM.
+Network calls.
+Database queries.
+Randomness.
+External state.
+Hidden mutable configuration.
+Implement it as a pure Python module.
+The same facts, evaluation date, and rule version must produce exactly the same result.
+8.1 Rule representation
+Use a structured JSON or YAML rule DSL.
+Each rule condition must identify:
+Unique condition ID.
+Human-readable description.
+Fact key.
+Operator.
+Comparison value.
+Data type and units.
+Allowed evidence types.
+Applicable document validity rules.
+Required official source clause.
+Reason codes.
+Applicable effective period where relevant.
+Support comparison operators:
+Equal.
+Not equal.
+Greater than.
+Greater than or equal.
+Less than.
+Less than or equal.
+Membership.
+Range.
+Existence.
+Support nested logical expressions using:
+AND.
+OR.
+NOT.
+Do not use arbitrary Python eval() or executable expressions from rule files.
+Validate the DSL against a strict schema.
+8.2 Three-valued logic
+Every condition must evaluate to exactly one of:
+SATISFIED
+NOT_SATISFIED
+INSUFFICIENT_EVIDENCE
+Internally implement TRUE, FALSE, and UNKNOWN using Kleene three-valued logic.
+AND:
+FALSE if any input is FALSE.
+UNKNOWN if none is FALSE and at least one is UNKNOWN.
+TRUE if all inputs are TRUE.
+OR:
+TRUE if any input is TRUE.
+UNKNOWN if none is TRUE and at least one is UNKNOWN.
+FALSE if all inputs are FALSE.
+NOT:
+TRUE becomes FALSE.
+FALSE becomes TRUE.
+UNKNOWN remains UNKNOWN.
+Implement exhaustive truth-table tests.
+8.3 Missing and conflicting evidence
+Return INSUFFICIENT_EVIDENCE when an appropriate condition cannot be established.
+Support reason codes such as:
+MISSING_DOCUMENT
+MISSING_FIELD
+LOW_OCR_CONFIDENCE
+UNCONFIRMED_FIELD
+CONFLICTING_EVIDENCE
+EXPIRED_DOCUMENT
+UNSUPPORTED_DOCUMENT
+UNVERIFIED_CORRECTION
+AMBIGUOUS_VALUE
+These are examples, not substitutes for a properly documented reason-code taxonomy.
+Missing evidence must never automatically be interpreted as a failed eligibility condition.
+Likewise, an explicitly verified failing condition must not be hidden merely because another condition lacks evidence.
+8.4 Rule validation
+Reject publication when:
+Required rule values are null.
+A condition has no valid source clause.
+A referenced fact key is unknown.
+A logical expression references an undefined condition.
+Numeric units are inconsistent.
+Dates are invalid.
+Mandatory evidence metadata is missing.
+Rule semantics cannot be evaluated.
+Required regression tests are absent or failing.
+A new rule must be reviewed and explicitly approved before becoming active.
+8.5 Aggregate verdicts
+Produce one of three preliminary scheme-level verdicts:
+LIKELY_ELIGIBLE
+NEEDS_EVIDENCE
+NOT_ELIGIBLE
+Mapping:
+Root TRUE → LIKELY_ELIGIBLE
+Root UNKNOWN → NEEDS_EVIDENCE
+Root FALSE → NOT_ELIGIBLE
+Always display that a positive assessment does not guarantee government approval.
+8.6 Ranking
+Rank results deterministically.
+Primary order:
+Likely eligible.
+Needs additional evidence.
+Not eligible.
+Within NEEDS_EVIDENCE, prioritize schemes with fewer distinct missing documents, using a stable scheme ID tie-breaker.
+Do not present fabricated approval percentages, probabilities, or confidence scores.
+8.7 Explanation and provenance output
+For every condition return:
+Condition ID.
+Evaluated status.
+Reason code.
+Relevant fact IDs.
+Supporting document IDs when available.
+Bounding boxes when available.
+Official clause reference.
+Rule version.
+Comparison details.
+Missing evidence requirements.
+Null provenance fields are acceptable when evidence is genuinely absent; never fabricate a document reference.
+Preserve the exact rule versions used in previous evaluations.
+
+9. RETRIEVAL-AUGMENTED EXPLANATION SYSTEM
+Implement a local knowledge retrieval and explanation subsystem.
+9.1 Retrieval responsibilities
+Use retrieval for:
+Finding relevant scheme descriptions.
+Retrieving official clauses.
+Providing citations.
+Explaining eligibility requirements.
+Answering questions about available scheme guidance.
+Supporting administrative rule review.
+Retrieval must not independently determine or override eligibility.
+9.2 Hybrid search
+Implement PostgreSQL full-text retrieval and optional pgvector semantic retrieval.
+Use appropriate indexing and ranking.
+If local embedding models are unavailable, the system must remain functional using full-text search and deterministic clause lookup.
+A source clause identified by the rule engine should be retrieved through its stable identifier, rather than depending on approximate vector similarity.
+9.3 Local explanation generation
+Provide two explanation paths:
+Path A — Required: Deterministic bilingual explanation templates based on rule-engine results and reason codes.
+Path B — Optional: A locally running LLM through Ollama, used only to rephrase approved results and retrieved text.
+The application must run successfully without Path B.
+If Ollama or a compatible model is unavailable, use Path A automatically.
+9.4 Explanation safeguards
+LLM-generated text must not:
+Change eligibility statuses.
+Change numeric thresholds.
+Invent government requirements.
+Invent official clauses.
+Misstate missing documents.
+Add unsupported deadlines.
+Promise benefit approval.
+Introduce unsupported application instructions.
+Use structured output validation.
+Reject explanations containing inconsistent rule references, statuses, or values.
+Fall back to deterministic templates when validation fails.
+The UI must render official statuses directly from the rule-engine output.
+Never let free-form model text determine the displayed verdict.
+9.5 Citations
+Each relevant explanation must include a link or reference to the official source clause.
+If the source is missing or unresolved, display an appropriate warning and avoid an unsupported claim.
+
+10. SCHEME RECOMMENDATION SYSTEM
+Create a recommendation layer driven by the rule engine.
+For each assessed scheme, display:
+Scheme name.
+Department.
+Description.
+Preliminary eligibility verdict.
+Reasons for the verdict.
+Satisfied conditions.
+Failed conditions.
+Conditions requiring evidence.
+Required documents.
+Missing documents.
+Supporting source references.
+Official application steps where verified.
+Provide useful filters for:
+Eligibility status.
+Scheme category.
+Department.
+Evidence completeness.
+Distinguish assessed schemes from schemes lacking sufficient rule data to evaluate.
+Do not silently omit unassessed schemes while implying that the displayed list is exhaustive.
+
+11. PERSONALIZED DOCUMENT CHECKLIST
+Develop a checklist generator that uses condition results and approved scheme metadata.
+For each checklist entry include:
+Document type.
+Why it is needed.
+Relevant condition IDs.
+Whether evidence already exists.
+Whether the document needs replacement.
+Whether a field needs confirmation.
+Whether documents conflict.
+How to obtain the document, when verified instructions are available.
+Deduplicate repeated document requirements.
+Do not generate unnecessary document requests.
+Support Kannada and English.
+Allow checklist export as PDF.
+Use a suitable Unicode font that supports Kannada.
+The exported report must render Kannada characters correctly.
+
+12. KANNADA AND ENGLISH ACCESSIBILITY
+Build accessibility into the frontend from the beginning.
+12.1 Language support
+Provide complete Kannada and English translations for user-facing application text.
+Use centralized localization dictionaries.
+Avoid hardcoded English labels scattered throughout components.
+Ensure Kannada font rendering is correct.
+12.2 Elder-friendly interface
+Provide:
+Large readable typography.
+High-contrast mode.
+Keyboard accessibility.
+Visible focus indicators.
+Clear error messages.
+Large touch targets.
+Simple navigation.
+Minimal cognitive load.
+Step-by-step upload guidance.
+Progress indicators.
+Helpful confirmation dialogs.
+Target WCAG 2.2 AA where practical and verify key interactions using accessibility tests.
+12.3 Voice support
+Provide optional voice assistance using locally available speech capabilities.
+Support:
+Reading instructions aloud.
+Reading eligibility explanations.
+Reading missing-document instructions.
+Kannada and English voice selection where supported.
+Speech input is optional.
+Browser speech functionality may depend on the operating system or external browser services.
+Do not silently transmit sensitive content to third-party speech services.
+Detect supported local speech capabilities, disclose limitations, and fall back to text if necessary.
+Do not mark a language's voice feature as supported unless it has been verified.
+
+13. CAREGIVER MODE
+Provide a separate caregiver-oriented workflow.
+Required functionality:
+Manage authorized elderly profiles.
+Select which profile to assist.
+Upload documents for a selected profile.
+Confirm extracted details.
+Run assessments.
+View previous assessments.
+Print or export reports.
+Delete managed data where authorized.
+Always enforce authorization at the backend.
+Do not rely solely on frontend role checks.
+
+14. GOVERNMENT SOURCE MONITORING
+Implement a locally running source-monitoring subsystem.
+14.1 Source registry
+Maintain an allowlist of official Karnataka government source URLs.
+Allow administrators to manage source records.
+Do not guess official URLs.
+14.2 Monitoring
+Create local scheduled jobs that:
+Fetch allowlisted public sources.
+Respect rate limits and applicable access restrictions.
+Store source snapshots.
+Calculate content hashes.
+Detect changes.
+Compare old and new text.
+Identify potentially relevant rule changes.
+Create administrative review proposals.
+Store meaningful errors when sources are unavailable.
+Do not bypass government website authentication, CAPTCHAs, or access controls.
+14.3 Change classification
+Classify changes into categories such as:
+Eligibility.
+Benefit amount.
+Required documents.
+Application procedures.
+Deadlines.
+Administrative changes.
+Cosmetic changes.
+Classification may use heuristics or an optional local LLM.
+LLM classification must never publish rules automatically.
+14.4 Human approval
+Provide an administrative review interface displaying:
+Previous source content.
+New source content.
+Textual diff.
+Affected scheme.
+Proposed rule changes.
+Supporting source information.
+Validation results.
+Test results.
+Allow the administrator to approve, edit, or reject proposals.
+Approval must:
+Validate the complete revised rules.
+Resolve source-clause references.
+Run required rule tests.
+Create a new immutable rule version.
+Record the approving administrator and timestamp.
+Activate the approved version.
+Preserve historical evaluations.
+Prevent simultaneous or partial publication of conflicting versions.
+When old results are viewed, indicate if the underlying rules have since changed.
+
+15. DATABASE DESIGN
+Implement relational models and database migrations.
+At minimum, support the following entities:
+User.
+UserRole.
+ElderProfile.
+CaregiverAuthorization.
+ConsentRecord.
+UploadedDocument.
+DocumentProcessingJob.
+ExtractedFact.
+FactConfirmation.
+Scheme.
+SchemeSource.
+SourceClause.
+SchemeRuleVersion.
+EligibilityEvaluation.
+ConditionResult.
+SchemeResult.
+MissingDocumentChecklist.
+SourceSnapshot.
+ChangeProposal.
+AdministrativeApproval.
+AuditLog.
+Use appropriate constraints, indexes, foreign keys, and cascading deletion behavior.
+Sensitive data must not be unnecessarily duplicated.
+Do not retain raw identity numbers when only a masked reference is necessary.
+Implement migrations using Alembic.
+The database must be initialized automatically through the documented local startup procedure.
+
+16. BACKEND API
+Create a REST API using FastAPI.
+Use versioned routes under /api/v1.
+Suggested routes include:
+Authentication
+POST /auth/request-otp
+POST /auth/verify-otp
+POST /auth/logout
+GET /auth/me
+Profiles
+POST /profiles
+GET /profiles
+GET /profiles/{id}
+PATCH /profiles/{id}
+Consent
+POST /profiles/{id}/consent
+GET /profiles/{id}/consent
+POST /profiles/{id}/consent/revoke
+Documents
+POST /profiles/{id}/documents
+GET /profiles/{id}/documents
+GET /documents/{id}
+DELETE /documents/{id}
+Processing jobs
+GET /jobs/{id}
+Extracted facts
+GET /profiles/{id}/facts
+PATCH /facts/{id}
+POST /facts/{id}/confirm
+Schemes
+GET /schemes
+GET /schemes/{id}
+GET /schemes/{id}/sources
+Evaluations
+POST /profiles/{id}/evaluations
+GET /evaluations/{id}
+GET /evaluations/{id}/checklist
+GET /evaluations/{id}/export
+Administrative operations
+GET /admin/sources
+POST /admin/sources
+GET /admin/change-proposals
+GET /admin/change-proposals/{id}
+POST /admin/change-proposals/{id}/approve
+POST /admin/change-proposals/{id}/reject
+GET /admin/rules/{scheme_id}/versions
+POST /admin/rules/validate
+GET /admin/audit
+Privacy
+DELETE /profiles/{id}/data
+Use validated request and response schemas, appropriate HTTP status codes, structured errors, authentication, authorization, pagination where needed, and generated OpenAPI documentation.
+Do not expose uploaded personal documents through public static URLs.
+
+17. PRIVACY AND SECURITY
+Implement privacy by design.
+17.1 Data minimization
+Collect only information necessary for preliminary eligibility assessment.
+Avoid storing full identification numbers.
+Mask sensitive identifiers.
+Never log sensitive document contents, authentication codes, or full personal records.
+17.2 Data protection
+Implement:
+Encryption at rest for uploaded documents.
+TLS guidance for any future non-local deployment.
+Restricted file access.
+Secure authentication.
+Role-based authorization.
+Rate limiting.
+Session security.
+Appropriate CORS configuration.
+CSRF protections where required.
+Input validation.
+Upload restrictions.
+Safe error handling.
+Secrets stored outside source code.
+Do not use hardcoded production secrets.
+17.3 Data retention
+Implement configurable document retention periods.
+Provide automatic cleanup jobs.
+User-requested deletion must remove applicable document objects, extracted facts, and associated personal records according to the defined deletion policy.
+Ensure cleanup works even if a document-processing job fails.
+17.4 AI privacy
+Do not send personal documents, names, identification numbers, or sensitive extracted facts to external LLM APIs.
+Optional local AI integrations must be disabled by default until configured.
+17.5 Legal positioning
+Design consent and privacy controls with applicable Indian data protection requirements in mind.
+Do not falsely claim formal legal compliance or certification.
+Display clear limitations and recommend legal review before handling real citizen data outside a controlled demonstration.
+
+18. FRONTEND DESIGN AND REQUIRED SCREENS
+Build a polished and coherent frontend.
+Required pages:
+Landing page.
+Login or local demonstration access.
+Language selection.
+Citizen dashboard.
+Caregiver dashboard.
+Profile creation and management.
+Consent.
+Document upload.
+Processing status.
+OCR review and correction.
+Scheme assessment results.
+Detailed scheme explanation.
+Missing-document checklist.
+Previous assessments.
+Data and privacy settings.
+Administrator dashboard.
+Government-source change review.
+Rule-version history.
+Appropriate error and empty states.
+Use a consistent component library and visual design system.
+Favor a restrained, professional palette, accessible typography, and readable cards.
+Make the interface responsive on:
+Desktop.
+Tablet.
+Mobile.
+Use meaningful loading states.
+Every important visible action must be connected to functioning backend behavior.
+Do not leave decorative buttons that appear operational but perform no action.
+Do not display fabricated statistics, fake scheme popularity, fake government endorsements, or artificial success testimonials.
+
+19. EVALUATION AND RESEARCH METRICS
+Build an evaluation harness suitable for an academic project.
+19.1 Synthetic evaluation dataset
+Generate 40–60 synthetic citizen profiles with labeled expected outputs.
+Include examples involving:
+Kannada documents.
+English documents.
+Mixed-language documents.
+Clear scans.
+Blurred photographs.
+Missing documents.
+Conflicting facts.
+Expired documents.
+Incorrect OCR extraction.
+Boundary conditions.
+Conditions that are clearly satisfied.
+Conditions that are clearly not satisfied.
+Conditions with insufficient evidence.
+Use synthetic, non-sensitive data.
+Ensure rule-engine test expectations are generated from an independent, explicitly reviewed specification rather than by copying the engine's own outputs.
+Provide representative synthetic images and documents for end-to-end testing where feasible.
+19.2 OCR metrics
+Measure:
+Field-level exact-match accuracy.
+Normalized field accuracy.
+Accuracy by document type.
+Accuracy by language.
+Missing-field detection.
+Processing failures.
+Do not fabricate benchmark numbers.
+Report actual results obtained from executable tests.
+19.3 Eligibility engine metrics
+Measure:
+Condition-level accuracy.
+Scheme-level verdict accuracy.
+Agreement with independently labeled expected decisions.
+Correct handling of insufficient evidence.
+Incorrect positive eligibility assessments.
+Incorrect negative eligibility assessments.
+The deterministic engine must pass all defined golden rule tests.
+19.4 Checklist metrics
+Measure:
+Precision of missing-document identification.
+Recall of missing-document identification.
+Incorrect document requests.
+Duplicate document requests.
+19.5 Explanation metrics
+Measure:
+Citation correctness.
+Verdict consistency.
+Unsupported claim detection.
+Explanation validator pass rate.
+Template fallback frequency.
+19.6 Monitoring metrics
+Measure:
+Detection of seeded source changes.
+Correct classification.
+Correct review-queue creation.
+Prevention of unapproved publication.
+19.7 Human comparison
+Provide a mechanism for importing independently labeled caseworker assessments.
+Do not claim human agreement results until actual human evaluations have been conducted.
+Store evaluation outputs in a clear, reproducible format.
+Provide an accessible evaluation dashboard or generated local report.
+
+20. TESTING REQUIREMENTS
+Implement meaningful automated tests.
+Unit tests
+Cover:
+Rule DSL validation.
+All comparison operators.
+Kleene truth tables.
+Nested logical expressions.
+Missing evidence.
+Conflicting evidence.
+Boundary values.
+Date calculations.
+Expired documents.
+Rule-version behavior.
+Recommendation ranking.
+Checklist generation.
+Explanation validation.
+Data normalization.
+Integration tests
+Cover:
+Authentication.
+Profile ownership.
+Consent enforcement.
+Document upload.
+Background processing.
+Fact persistence.
+Fact confirmation.
+Eligibility evaluation.
+Retrieval.
+Report export.
+Data deletion.
+Administrative approval.
+Rule publishing.
+End-to-end tests
+Use Playwright to test:
+Open the application.
+Select Kannada or English.
+Enter the local demonstration workflow.
+Create or select a profile.
+Provide consent.
+Upload a synthetic document.
+Wait for OCR processing.
+Review extracted fields.
+Confirm or correct information.
+Run eligibility evaluation.
+View the resulting scheme recommendations.
+Inspect condition-level explanations.
+Download a checklist or report.
+Verify caregiver permissions.
+Verify unauthorized access is denied.
+Exercise the admin approval workflow.
+Delete demonstration data.
+Test actual frontend-backend integration.
+Do not replace all functional testing with mocked API responses.
+Use mocks only where necessary to isolate external or optional dependencies.
+
+21. IMPLEMENTATION EXECUTION ORDER
+Implement the project in the following sequence.
+Do not skip fundamental dependencies.
+Phase 1 — Environment and scaffolding
+Inspect the current local environment.
+Check Docker, Python, Node.js, and package managers.
+Create the complete project directory structure.
+Configure frontend and backend.
+Configure Docker Compose.
+Configure environment variables.
+Add database migrations.
+Implement health endpoints.
+Create local start and test scripts.
+Verify the basic services start.
+Acceptance: The frontend, backend, and required local infrastructure can start and pass health checks.
+Phase 2 — Core data models and deterministic engine
+Implement database models.
+Implement the rule DSL.
+Implement strict rule validation.
+Implement three-valued evaluation.
+Implement provenance output.
+Implement scheme ranking.
+Implement the missing-document checklist.
+Add comprehensive unit and golden tests.
+Use fictional demonstration rules in tests.
+Acceptance: Every defined rule-engine test passes without an LLM or external network.
+Phase 3 — Authentication, profiles, and consent
+Implement local development authentication.
+Implement profile management.
+Implement caregiver authorization.
+Implement consent records.
+Implement role-based access control.
+Add authorization tests.
+Acceptance: Users can securely access their own demonstration profiles and cannot access another user's private profiles.
+Phase 4 — Document processing
+Implement upload endpoints.
+Configure MinIO storage.
+Add file validation.
+Add document quality checks.
+Add preprocessing.
+Integrate Kannada and English Tesseract OCR.
+Implement field extraction and normalization.
+Store evidence provenance.
+Implement field confirmation and correction.
+Add document-processing tests.
+Acceptance: A user can upload a supported synthetic document, process it, and review extracted information.
+Phase 5 — Scheme registry and retrieval
+Implement scheme and source models.
+Create clearly marked synthetic demonstration schemes.
+Implement source ingestion.
+Implement clause indexing.
+Implement keyword retrieval.
+Add semantic retrieval where available.
+Connect the scheme registry to the evaluator.
+Acceptance: An approved test scheme's rules and source references can be retrieved and assessed correctly.
+Phase 6 — Citizen frontend
+Implement the landing page.
+Implement bilingual localization.
+Implement the citizen dashboard.
+Implement consent and upload pages.
+Implement OCR review.
+Implement evaluation and results pages.
+Implement checklists and exports.
+Integrate every page with real backend APIs.
+Acceptance: The entire demonstration journey works through the browser.
+This phase completes the first functional MVP.
+Phase 7 — Caregiver workflow and accessibility
+Implement caregiver dashboard.
+Implement multiple authorized profiles.
+Improve Kannada support.
+Add accessible interface settings.
+Add verified local voice capabilities where supported.
+Test keyboard navigation and contrast.
+Acceptance: Caregivers can assist authorized profiles, and the primary workflow is accessible in Kannada and English.
+Phase 8 — Explanation system
+Implement bilingual deterministic explanations.
+Add clause references.
+Implement optional local LLM interface.
+Implement strict explanation validation.
+Implement fallback behavior.
+Acceptance: Explanations remain correct with the LLM disabled and cannot alter rule-engine verdicts.
+Phase 9 — Source monitoring and administration
+Implement the source registry.
+Add local scheduled monitoring.
+Add source snapshots.
+Add change detection.
+Add review proposals.
+Implement admin review screens.
+Implement approval and rejection.
+Add rule versioning and audit logs.
+Acceptance: A simulated source change is detected, reviewed, and published only after approval and successful validation.
+Phase 10 — Security and evaluation
+Implement retention cleanup.
+Verify deletion.
+Harden upload handling.
+Test authentication and authorization.
+Audit log output for sensitive data.
+Run evaluation datasets.
+Generate actual metrics.
+Fix regressions.
+Perform browser-based accessibility checks.
+Acceptance: Security and evaluation test suites pass, or remaining blockers are explicitly identified.
+Phase 11 — Final integration and verification
+Run the complete application locally.
+Verify:
+All required containers are healthy.
+Database migrations succeed.
+Demo data loads.
+Backend APIs respond correctly.
+Frontend pages render.
+OCR processing works.
+Eligibility evaluation works.
+Scheme results display correctly.
+Checklist export works.
+Kannada text renders correctly.
+Role-based access restrictions work.
+Admin approval works.
+Data deletion works.
+Automated tests pass.
+Fix all reproducible errors within the available environment.
+Do not mark the project complete merely because the code was generated.
+
+22. FINAL FUNCTIONAL DEMONSTRATION
+Ensure the application contains a usable demonstration experience.
+Create at least three clearly fictional test profiles.
+For example:
+Profile A: A synthetic elderly resident whose documents satisfy all conditions of one fictional demonstration scheme.
+Expected result: LIKELY_ELIGIBLE.
+Profile B: A synthetic elderly resident with missing income evidence.
+Expected result: NEEDS_EVIDENCE.
+Profile C: A synthetic resident with verified evidence that fails a mandatory fictional scheme condition.
+Expected result: NOT_ELIGIBLE.
+These examples must not be presented as actual Karnataka government decisions.
+Create any synthetic documents required for these demonstrations.
+The reviewer should be able to explore all three outcomes through the actual website.
+The demonstration must include uploaded-document processing, visible evidence, and condition explanations.
+
+23. NON-NEGOTIABLE ENGINEERING RULES
+Follow these throughout development.
+The deterministic rule engine is the sole authority for eligibility verdicts.
+LLM output must never override a rule decision.
+All live government rules require source provenance and approval.
+No fabricated official requirements.
+Missing evidence is not automatic ineligibility.
+A user-corrected field is not automatically authenticated.
+Maintain clear separation between synthetic and approved live schemes.
+Never claim that preliminary results are government approvals.
+Preserve historical rule versions.
+Keep the system functional without optional AI models.
+Keep all citizen document processing local by default.
+Enforce ownership and access checks in the backend.
+Avoid sensitive data in logs.
+Keep the code modular, typed where appropriate, and testable.
+Do not leave major features as non-functional placeholders.
+Do not hardcode secrets.
+Do not introduce GitHub or cloud-deployment dependencies.
+Use actual tests rather than invented metrics.
+Never mark a feature as complete if its essential behavior is missing.
+Prefer a functional, well-tested implementation over unnecessary complexity.
+
+24. HOW YOU MUST WORK AS CODEX
+Follow this execution protocol.
+Step 1: Inspect
+Inspect the current project directory and local tooling.
+If the directory is empty, initialize the application there.
+If project files already exist, inspect them before modifying anything.
+Step 2: Plan internally
+Determine the component dependencies and implementation order.
+Do not stop after presenting the plan.
+Proceed directly to implementation.
+Step 3: Execute
+Create and modify the required files.
+Use terminal commands to install dependencies and run local services when permitted.
+You are responsible for producing actual code and configurations.
+Step 4: Test continuously
+After completing a significant module:
+Run its tests.
+Inspect failures.
+Correct underlying problems.
+Re-run the affected tests.
+Check for regressions.
+Do not conceal failing tests.
+Step 5: Integrate
+Connect the frontend, backend, database, storage, OCR pipeline, rule engine, and supporting services.
+Verify complete workflows rather than assuming compatibility.
+Step 6: Track progress
+Maintain a simple local implementation progress record automatically.
+This is an internal development artifact; the user must not have to create or upload any instruction files.
+Record completed work, test status, blockers, and the next implementation step.
+Step 7: Resume intelligently
+If a Codex session is interrupted, use the existing local source code and progress record to determine what remains.
+Do not restart the project unnecessarily.
+Do not rewrite completed working components without justification.
+Step 8: Report accurately
+After each major milestone, briefly report:
+What was implemented.
+What was tested.
+Which tests passed or failed.
+What remains.
+Any action required from the user.
+Continue implementing whenever the environment permits.
+Do not represent future planned work as already completed.
+
+25. DEFINITION OF DONE
+FormFlow AI is not finished until the following conditions are satisfied.
+Core functionality
+Frontend starts locally.
+Backend starts locally.
+Database and required services work.
+Users can access a local demonstration account.
+Citizen and caregiver profiles work.
+Consent is enforced.
+Documents can be uploaded.
+OCR processes supported sample documents.
+Extracted fields can be reviewed and corrected.
+Deterministic rules evaluate evidence.
+Three-valued logic works.
+Conflicting and missing evidence is handled.
+Demonstration schemes produce correct results.
+Scheme results are ranked deterministically.
+Condition-level explanations and provenance display.
+Missing-document checklists are generated.
+Reports can be exported.
+Kannada and English primary workflows work.
+Authorized caregiver workflows function.
+Admin scheme review and approval functions.
+Source-change monitoring works with test fixtures.
+Rule versions and audit records are preserved.
+Data deletion and retention mechanisms work.
+Backend authorization is enforced.
+Unit and integration tests run.
+End-to-end browser tests run.
+Actual evaluation results can be generated.
+If any requirement is incomplete, classify it accurately as incomplete, blocked, optional, or verified.
+Do not falsely declare total completion.
+
+26. REQUIRED FINAL DELIVERY
+When implementation reaches a verifiable stopping point, provide a clear final report containing:
+A. Application status
+Indicate whether the application is fully working, partially working, or blocked.
+B. Completed functionality
+Summarize what is actually implemented and tested.
+C. Local startup instructions
+Provide the exact commands needed to launch the application on the user's computer.
+D. Local URLs
+Provide frontend, backend, and administrative URLs actually configured.
+E. Demonstration access
+Explain how to use development accounts and synthetic demonstration profiles without exposing sensitive credentials in the report.
+F. Testing
+Provide actual commands, pass/fail results, and relevant logs or summaries.
+G. Remaining limitations
+List incomplete features, unavailable services, and unverified government scheme data.
+H. Future expansion
+Briefly identify logical next steps after the local application is stable.
+Do not recommend GitHub setup or cloud deployment unless the user requests it in a later conversation.
+
+27. START EXECUTION NOW
+You have the complete specification.
+Your task is not to explain how FormFlow AI could be built.
+Your task is to build FormFlow AI inside the currently selected local project directory.
+Begin immediately by:
+Inspecting the local environment.
+Checking development prerequisites.
+Creating the application structure.
+Setting up local infrastructure.
+Implementing the deterministic eligibility engine.
+Building the backend and frontend.
+Completing the functional demonstration workflow.
+Implementing the remaining features in dependency order.
+Running tests and fixing failures.
+Launching and verifying the application locally.
+Make reasonable engineering decisions autonomously.
+Do not create or connect a GitHub repository.
+Do not deploy to the cloud.
+Do not substitute mockup screenshots for working functionality.
+Do not stop after scaffolding or planning.
+Prioritize a functioning end-to-end system and progressively extend it toward the full specification.
+Start implementing FormFlow AI now.

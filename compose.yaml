@@ -1,0 +1,109 @@
+name: formflow
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_DB: formflow
+      POSTGRES_USER: formflow
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Run scripts/setup.ps1}
+    volumes: ["postgres-data:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U formflow -d formflow"]
+      interval: 5s
+      retries: 20
+    restart: unless-stopped
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--save", "", "--appendonly", "no"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      retries: 20
+    restart: unless-stopped
+  minio:
+    build:
+      context: .
+      dockerfile: infrastructure/minio.Dockerfile
+    command: server /data --console-address :9001
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    ports: ["127.0.0.1:9001:9001"]
+    volumes: ["minio-data:/data"]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 5s
+      retries: 20
+    restart: unless-stopped
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment: &backend-env
+      DATABASE_URL: postgresql+psycopg://formflow:${POSTGRES_PASSWORD}@postgres/formflow
+      REDIS_URL: redis://redis:6379/0
+      MINIO_ENDPOINT: http://minio:9000
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+      FORMFLOW_KEY: ${FORMFLOW_KEY}
+      FORMFLOW_MODE: ${FORMFLOW_MODE:-DEMO}
+      DEVELOPMENT: ${DEVELOPMENT:-true}
+      RETENTION_DAYS: ${RETENTION_DAYS:-30}
+    ports: ["127.0.0.1:8000:8000"]
+    volumes: ["./data:/app/data"]
+    tmpfs: ["/tmp:rw,noexec,nosuid,size=512m"]
+    depends_on:
+      postgres: {condition: service_healthy}
+      redis: {condition: service_healthy}
+      minio: {condition: service_healthy}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 10s
+      retries: 20
+      start_period: 15s
+    restart: unless-stopped
+  worker:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    command: celery -A app.worker.celery worker --loglevel=WARNING --concurrency=2
+    environment: *backend-env
+    volumes: ["./data:/app/data"]
+    tmpfs: ["/tmp:rw,noexec,nosuid,size=512m"]
+    depends_on:
+      backend: {condition: service_healthy}
+    healthcheck:
+      test: ["CMD-SHELL", "celery -A app.worker.celery inspect ping --timeout 5 | grep -q pong"]
+      interval: 30s
+      retries: 5
+    restart: unless-stopped
+  scheduler:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    command: celery -A app.worker.celery beat --loglevel=WARNING --schedule=/app/data/celerybeat-schedule --pidfile=/app/data/scheduler.pid
+    environment: *backend-env
+    volumes: ["./data:/app/data"]
+    depends_on:
+      backend: {condition: service_healthy}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import os; os.kill(int(open('/app/data/scheduler.pid').read()), 0)"]
+      interval: 20s
+      retries: 10
+    restart: unless-stopped
+  frontend:
+    build:
+      context: ./frontend
+    environment:
+      API_INTERNAL_URL: http://backend:8000
+    ports: ["127.0.0.1:3000:3000"]
+    depends_on:
+      backend: {condition: service_healthy}
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://localhost:3000').then(r=>{if(!r.ok)process.exit(1)})"]
+      interval: 15s
+      retries: 15
+    restart: unless-stopped
+volumes:
+  postgres-data:
+  minio-data:
