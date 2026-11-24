@@ -95,6 +95,12 @@ export type Result = {
   checklist: Checklist[];
   category: string;
   department: string;
+  evidence_guidance?: {
+    unresolved_conditions: string[];
+    documents: { document_type: string; resolves: string[] }[];
+    no_sufficient_mapping: string[];
+    method: string;
+  };
 };
 export type Assessment = {
   id: string;
@@ -113,6 +119,63 @@ export type Scheme = {
   category: string;
   department: string;
 };
+export type ResearchField = {
+  value: string;
+  value_kn?: string;
+  passages: string[];
+};
+export type ResearchScheme = {
+  id: string;
+  name: string;
+  name_kn: string;
+  primary_url: string;
+  review_status: string;
+  assessment_enabled: boolean;
+  eligibility: ResearchField[];
+  exceptions: ResearchField[];
+  benefits: ResearchField[];
+  application_documents: ResearchField[];
+  application: ResearchField[];
+  unresolved: string[];
+};
+export type ResearchAnswer = {
+  answer: string;
+  status: string;
+  model_status: string;
+  citations: {
+    id: string;
+    url: string;
+    section: string;
+    page: number | null;
+    text: string;
+    source_version: string;
+  }[];
+};
+export type ResearchStatus = {
+  sources: {
+    id: string;
+    title: string;
+    url: string;
+    status: string;
+    last_error?: string;
+    error?: string;
+    content_hash: string | null;
+    retrieved_at: string;
+    extraction_note?: string;
+  }[];
+  passage_count: number;
+  model_error: string | null;
+  dense_model: string | null;
+  reranker_model: string | null;
+  generation_provider: string;
+  generation_model: string;
+  evaluation: {
+    results: Record<
+      string,
+      { status: string; recall_at_5?: number; mrr_at_10?: number }
+    >;
+  } | null;
+};
 export type Proposal = {
   id: string;
   scheme_id: string;
@@ -123,6 +186,11 @@ export type Proposal = {
   proposed_rule: Record<string, unknown>;
   regression_cases: Record<string, unknown>[];
   validation: Record<string, unknown>;
+  impact?: {
+    condition_ids: string[];
+    assessment_ids: string[];
+    reason: string;
+  };
 };
 export type Overview = {
   proposals: Proposal[];

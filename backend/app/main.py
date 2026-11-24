@@ -42,6 +42,9 @@ from .documents import inspect, synthetic_pdf, synthetic_png
 from .rules import Rule, evaluate, rank
 from .seed import seed, seed_profiles
 from .worker import process, cleanup
+from .research import ResearchIndex
+from .monitor import proposal_impact
+from functools import lru_cache
 
 DEV = os.getenv("DEVELOPMENT", "true").lower() == "true"
 MODE = os.getenv("FORMFLOW_MODE", "DEMO")
@@ -522,6 +525,48 @@ def schemes(db: SqlSession = Depends(get_db)):
     return [dict(s.metadata_json, active_version=s.active_version) for s in db.scalars(select(Scheme))]
 
 
+@lru_cache(maxsize=1)
+def research_index():
+    return ResearchIndex()
+
+
+@app.get(PREFIX + "/research/schemes")
+def research_schemes():
+    index = research_index()
+    passages = {p["id"]: p for p in index.passages}
+    return [
+        dict(scheme, **{
+            category: [dict(field, value_kn=" ".join(passages[ref]["text"] for ref in field["passages"])) for field in scheme[category]]
+            for category in ("eligibility", "exceptions", "benefits", "application_documents", "application")
+        })
+        for scheme in index.schemes
+    ]
+
+
+@app.get(PREFIX + "/research/status")
+def research_status():
+    index = research_index()
+    return {"sources": list(index.sources.values()), "passage_count": len(index.passages), "model_error": index.model_error, "dense_model": os.getenv("FORMFLOW_EMBED_MODEL") or None, "reranker_model": os.getenv("FORMFLOW_RERANK_MODEL") or None, "generation_provider": os.getenv("FORMFLOW_LLM_PROVIDER", "ollama"), "generation_model": os.getenv("FORMFLOW_LLM_MODEL", "qwen3:4b")}
+
+
+@app.get(PREFIX + "/admin/research")
+def admin_research(u=Depends(admin)):
+    from .research import ROOT
+    status = research_status()
+    report = ROOT / "evaluation.json"
+    status["evaluation"] = json.loads(report.read_text()) if report.exists() else None
+    return status
+
+
+@app.get(PREFIX + "/research/ask")
+def research_ask(q: str = "", scheme_id: str | None = None):
+    if len(q.strip()) < 3 or len(q) > 500:
+        raise HTTPException(422, "Question must contain 3–500 characters")
+    if scheme_id and scheme_id not in {s["id"] for s in research_index().schemes}:
+        raise HTTPException(404, "Scheme not in reviewed research corpus")
+    return research_index().answer(q, scheme_id)
+
+
 @app.get(PREFIX + "/search")
 def search(q: str = "", db: SqlSession = Depends(get_db)):
     q = q[:150]
@@ -645,10 +690,10 @@ def overview(u=Depends(admin), db: SqlSession = Depends(get_db)):
             for s in db.scalars(select(Source))
         ],
         "proposals": [
-            fields(
+            dict(fields(
                 p,
                 "id scheme_id base_version old_text new_text classification proposed_rule regression_cases state validation reviewed_by created_at",
-            )
+            ), impact=proposal_impact(db, p))
             for p in db.scalars(select(Proposal).order_by(Proposal.created_at.desc()))
         ],
         "versions": [
@@ -679,6 +724,7 @@ def save_source(body: SourceInput, u=Depends(admin), db: SqlSession = Depends(ge
         or parsed.port not in (None, 443)
         or parsed.username
         or parsed.fragment
+        or parsed.path.lower().endswith(".pdf")
     ):
         raise HTTPException(422, "Only verified allowlisted official HTTPS sources are accepted")
     if not db.get(Scheme, body.scheme_id):

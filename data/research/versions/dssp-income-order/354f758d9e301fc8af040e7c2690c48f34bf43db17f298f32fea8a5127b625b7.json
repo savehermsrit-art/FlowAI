@@ -1,0 +1,22 @@
+{
+  "source": {
+    "id": "dssp-income-order",
+    "url": "https://dssp.karnataka.gov.in/dssp/documents/Income%20limit%20Rs.32000%20Government%20Order_DS_S%20P-MIS_C-05_2020%2010.02.2021.pdf",
+    "title": "Income limit Rs 32000 order 10 February 2021",
+    "department": "Revenue Department",
+    "scheme_id": null,
+    "language": "kn",
+    "type": "pdf",
+    "publication_date": "2021-02-10",
+    "retrieved_at": "2026-11-23T18:01:56.769593+00:00",
+    "source_version": "354f758d9e30",
+    "content_hash": "354f758d9e301fc8af040e7c2690c48f34bf43db17f298f32fea8a5127b625b7",
+    "effective_date": null,
+    "raw_path": "raw/354f758d9e301fc8af040e7c2690c48f34bf43db17f298f32fea8a5127b625b7.pdf",
+    "content_type": "application/pdf",
+    "status": "fetched",
+    "extraction_note": "Embedded text is not usable Kannada; PDF retained for independent OCR and review",
+    "passage_count": 0
+  },
+  "passages": []
+}

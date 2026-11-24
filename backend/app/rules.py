@@ -299,7 +299,40 @@ def evaluate(rule: Rule, facts: list[dict], today: date) -> dict:
         "verdict": {Truth.TRUE: "LIKELY_ELIGIBLE", Truth.UNKNOWN: "NEEDS_EVIDENCE", Truth.FALSE: "NOT_ELIGIBLE"}[root],
         "conditions": results,
         "checklist": checklist,
+        "evidence_guidance": minimal_evidence_set(results),
         "disclaimer": "Preliminary guidance only. Not a government decision. DEMO rules are fictional.",
+    }
+
+
+def minimal_evidence_set(conditions):
+    """Exact minimum set cover for unresolved conditions and mapped document types.
+
+    An unknown effective rule or unmapped condition cannot be fixed by uploading
+    another document, so it remains explicitly unresolved.
+    """
+    from itertools import combinations
+
+    unresolved = [c for c in conditions if c["status"] == Truth.UNKNOWN.value]
+    needed = {c["id"] for c in unresolved}
+    mapping = {}
+    for condition in unresolved:
+        if condition.get("reason") == "RULE_NOT_EFFECTIVE":
+            continue
+        for document_type in condition.get("required_documents", []):
+            mapping.setdefault(document_type, set()).add(condition["id"])
+    impossible = sorted(needed - set().union(*mapping.values())) if mapping else sorted(needed)
+    target = needed - set(impossible)
+    selected = []
+    for size in range(1, len(mapping) + 1):
+        choices = [choice for choice in combinations(sorted(mapping), size) if set().union(*(mapping[c] for c in choice)) >= target]
+        if choices:
+            selected = list(choices[0])
+            break
+    return {
+        "unresolved_conditions": sorted(needed),
+        "documents": [{"document_type": name, "resolves": sorted(mapping[name] & target), "why": "One accepted document category may support each listed condition; facts still require review"} for name in selected],
+        "no_sufficient_mapping": impossible,
+        "method": "exact minimum document-type set cover; documents are guidance, not proof of eligibility",
     }
 
 

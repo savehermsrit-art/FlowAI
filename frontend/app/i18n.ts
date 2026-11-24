@@ -5,7 +5,7 @@ export const en = {
   schemeId: "Scheme",
   sourceUrl: "Official source URL",
   allowlisted:
-    "Only HTTPS URLs on the verified vijayapura.nic.in and chitradurga.nic.in source allowlist are accepted. New sources do not publish eligibility rules.",
+    "Only HTTPS HTML pages on the verified vijayapura.nic.in, chitradurga.nic.in and dssp.karnataka.gov.in allowlist are accepted. New sources do not publish eligibility rules.",
   brand: "FormFlow",
   region: "KARNATAKA · SENIOR CITIZEN SUPPORT",
   home: "Home",
@@ -147,7 +147,7 @@ export const en = {
   no: "Not granted",
   registry: "Explore the scheme registry.",
   registryText:
-    "Demo schemes are fictional. Real schemes shown below are discovery references and unavailable for assessment until complete rules are sourced and approved.",
+    "Explore archived official scheme information and cited answers. Personal assessment remains a fictional demonstration until rule and government-order review is complete.",
   unavailable: "Unavailable for assessment",
   official: "Open official source",
   search: "Search source clauses",
@@ -234,7 +234,7 @@ export const kn: Record<TextKey, string> = {
   schemeId: "ಯೋಜನೆ",
   sourceUrl: "ಅಧಿಕೃತ ಮೂಲ URL",
   allowlisted:
-    "ಪರಿಶೀಲಿಸಿದ vijayapura.nic.in ಮತ್ತು chitradurga.nic.in ತಾಣಗಳ HTTPS URL ಮಾತ್ರ ಸ್ವೀಕರಿಸಲಾಗುತ್ತದೆ. ಹೊಸ ಮೂಲ ಸೇರಿಸಿದರೆ ಅರ್ಹತೆಯ ನಿಯಮ ಪ್ರಕಟವಾಗುವುದಿಲ್ಲ.",
+    "vijayapura.nic.in, chitradurga.nic.in ಮತ್ತು dssp.karnataka.gov.in ತಾಣಗಳ HTTPS HTML ಪುಟಗಳನ್ನು ಮಾತ್ರ ಸ್ವೀಕರಿಸಲಾಗುತ್ತದೆ. ಹೊಸ ಮೂಲ ಸೇರಿಸಿದರೆ ಅರ್ಹತೆಯ ನಿಯಮ ಪ್ರಕಟವಾಗುವುದಿಲ್ಲ.",
   region: "ಕರ್ನಾಟಕ · ಹಿರಿಯ ನಾಗರಿಕರ ನೆರವು",
   home: "ಮುಖಪುಟ",
   schemes: "ಯೋಜನೆಗಳನ್ನು ನೋಡಿ",
@@ -367,7 +367,7 @@ export const kn: Record<TextKey, string> = {
   no: "ನೀಡಿಲ್ಲ",
   registry: "ಯೋಜನೆಗಳ ಪಟ್ಟಿಯನ್ನು ನೋಡಿ.",
   registryText:
-    "ಮಾದರಿ ಯೋಜನೆಗಳು ಕಾಲ್ಪನಿಕ. ನಿಜವಾದ ಯೋಜನೆಗಳು ಪರಿಚಯಕ್ಕಾಗಿ ಮಾತ್ರ; ಸಂಪೂರ್ಣ ನಿಯಮ ಮತ್ತು ಅನುಮೋದನೆ ಬರುವವರೆಗೆ ಮೌಲ್ಯಮಾಪನ ಲಭ್ಯವಿಲ್ಲ.",
+    "ಅಧಿಕೃತ ಯೋಜನೆಗಳ ಸಂಗ್ರಹಿತ ಮಾಹಿತಿ ಮತ್ತು ಮೂಲಸಹಿತ ಉತ್ತರಗಳನ್ನು ನೋಡಿ. ನಿಯಮ ಮತ್ತು ಆದೇಶಗಳ ಪರಿಶೀಲನೆ ಪೂರ್ಣಗೊಳ್ಳುವವರೆಗೆ ವೈಯಕ್ತಿಕ ಮೌಲ್ಯಮಾಪನವು ಕಾಲ್ಪನಿಕ ಮಾದರಿ ಮಾತ್ರ.",
   unavailable: "ಮೌಲ್ಯಮಾಪನ ಲಭ್ಯವಿಲ್ಲ",
   official: "ಅಧಿಕೃತ ಮೂಲ ತೆರೆಯಿರಿ",
   search: "ಮೂಲ ಷರತ್ತುಗಳನ್ನು ಹುಡುಕಿ",

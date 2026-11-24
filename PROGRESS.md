@@ -1,5 +1,9 @@
 # FormFlow AI implementation record
 
+Research update, 23 November 2026: see [docs/RESEARCH_PROTOTYPE.md](docs/RESEARCH_PROTOTYPE.md) for the archived official corpus, source-linked Q&A, optional measured BGE retrieval, synthetic evidence guidance and current blockers. The record below describes the earlier fictional-demo milestone and its then-current environment.
+
+RAG update, 24 November 2026: the research Q&A now sends retrieved official passages to a local Ollama model for English/Kannada answer generation. It checks returned source IDs, exact supporting quotes and numeric claims. The separate fictional eligibility evaluator remains deterministic.
+
 Last verified: 17 November 2026 (Asia/Kolkata).
 
 ## Current status

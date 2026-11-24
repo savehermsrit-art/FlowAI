@@ -1,0 +1,95 @@
+{
+  "dataset": "evidence_cases.json",
+  "status": "synthetic development only",
+  "count": 8,
+  "precision": 1.0,
+  "recall": 1.0,
+  "unmapped_correct": 8,
+  "minimum_size_correct": 8,
+  "details": [
+    {
+      "id": "separate",
+      "documents": [
+        "age_proof",
+        "income"
+      ],
+      "expected": [
+        "age_proof",
+        "income"
+      ],
+      "unmapped_correct": true,
+      "minimum_size_correct": true
+    },
+    {
+      "id": "shared",
+      "documents": [
+        "identity"
+      ],
+      "expected": [
+        "identity"
+      ],
+      "unmapped_correct": true,
+      "minimum_size_correct": true
+    },
+    {
+      "id": "alternative",
+      "documents": [
+        "identity"
+      ],
+      "expected": [
+        "identity"
+      ],
+      "unmapped_correct": true,
+      "minimum_size_correct": true
+    },
+    {
+      "id": "unmapped",
+      "documents": [],
+      "expected": [],
+      "unmapped_correct": true,
+      "minimum_size_correct": true
+    },
+    {
+      "id": "known_and_missing",
+      "documents": [
+        "income"
+      ],
+      "expected": [
+        "income"
+      ],
+      "unmapped_correct": true,
+      "minimum_size_correct": true
+    },
+    {
+      "id": "rule_not_effective",
+      "documents": [],
+      "expected": [],
+      "unmapped_correct": true,
+      "minimum_size_correct": true
+    },
+    {
+      "id": "conflicting",
+      "documents": [
+        "age_proof"
+      ],
+      "expected": [
+        "age_proof"
+      ],
+      "unmapped_correct": true,
+      "minimum_size_correct": true
+    },
+    {
+      "id": "two_cover_three",
+      "documents": [
+        "identity",
+        "income"
+      ],
+      "expected": [
+        "identity",
+        "income"
+      ],
+      "unmapped_correct": true,
+      "minimum_size_correct": true
+    }
+  ]
+}

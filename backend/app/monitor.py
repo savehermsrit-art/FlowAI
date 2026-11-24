@@ -9,9 +9,26 @@ from urllib.parse import urlparse
 
 import httpx
 from sqlalchemy import select
-from .db import DB, Source, Snapshot, Scheme, RuleVersion, Proposal
+from .db import DB, Source, Snapshot, Scheme, RuleVersion, Proposal, Evaluation
 
-ALLOWED = {"vijayapura.nic.in", "chitradurga.nic.in"}
+ALLOWED = {"vijayapura.nic.in", "chitradurga.nic.in", "dssp.karnataka.gov.in"}
+
+
+def proposal_impact(db, proposal):
+    """Conservative impact flag; it never claims a changed clause is proven."""
+    version = db.get(RuleVersion, f"{proposal.scheme_id}:{proposal.base_version}")
+    affected = []
+    if version and proposal.classification not in ("cosmetic", "administrative"):
+        if proposal.classification == "eligibility":
+            affected = [c["id"] for c in version.rule["conditions"]]
+        elif proposal.classification == "required_documents":
+            affected = [c["id"] for c in version.rule["conditions"] if c.get("evidence_types")]
+    assessment_ids = []
+    if affected:
+        for assessment in db.scalars(select(Evaluation)):
+            if any(r.get("scheme_id") == proposal.scheme_id and r.get("version") == proposal.base_version for r in assessment.results):
+                assessment_ids.append(assessment.id)
+    return {"condition_ids": affected, "assessment_ids": assessment_ids, "reason": f"Source change classified as {proposal.classification}; inspect old and new clauses before reassessment. This is a conservative flag, not a confirmed rule change."}
 
 
 def classify_change(old, new):
@@ -21,11 +38,11 @@ def classify_change(old, new):
         line for line in difflib.ndiff(old.splitlines(), new.splitlines()) if line.startswith(("+ ", "- "))
     ).lower()
     for category, words in [
-        ("eligibility", ("age", "income", "resident", "eligible")),
-        ("benefit_amount", ("amount", "rupees")),
-        ("required_documents", ("certificate", "document")),
-        ("deadlines", ("deadline", "last date")),
-        ("application_procedures", ("apply", "portal")),
+        ("eligibility", ("age", "income", "resident", "eligible", "ವಯಸ್ಸು", "ಆದಾಯ", "ಅರ್ಹತಾ", "ಪಿಂಚಣಿ")),
+        ("benefit_amount", ("amount", "rupees", "ಮೊತ್ತ", "ರೂ.")),
+        ("required_documents", ("certificate", "document", "ದಾಖಲೆ", "ದೃಢೀಕರಣ")),
+        ("deadlines", ("deadline", "last date", "ಕೊನೆಯ ದಿನಾಂಕ")),
+        ("application_procedures", ("apply", "portal", "ಅರ್ಜಿ", "ಸಲ್ಲಿಸ")),
     ]:
         if any(w in changed for w in words):
             return category
