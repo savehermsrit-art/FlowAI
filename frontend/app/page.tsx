@@ -1460,13 +1460,20 @@ export default function FormFlow() {
               {researchAnswer && (
                 <div className="answer-panel" aria-live="polite">
                   <strong>
-                    {lang === "kn" ? "ಮೂಲದ ಮಾಹಿತಿ" : "Source linked guidance"}
+                    {researchAnswer.status === "grounded_generation"
+                      ? lang === "kn"
+                        ? "ಮೂಲಾಧಾರಿತ AI ಉತ್ತರ"
+                        : "AI answer from official sources"
+                      : lang === "kn"
+                        ? "ಮೂಲ ಮಾಹಿತಿ ಲಭ್ಯವಿಲ್ಲ"
+                        : "Source answer unavailable"}
                   </strong>
                   <p>{researchAnswer.answer}</p>
                   <small>
+                    {researchAnswer.model_status} ·{" "}
                     {lang === "kn"
                       ? "ಮೂಲ ಉಲ್ಲೇಖಗಳನ್ನು ಪರಿಶೀಲಿಸಿ; ವೈಯಕ್ತಿಕ ಅರ್ಹತಾ ನಿರ್ಧಾರವಲ್ಲ."
-                      : researchAnswer.model_status}
+                      : "Check the cited sources; this is not a personal eligibility decision."}
                   </small>
                   {researchAnswer.citations.map((c) => (
                     <blockquote key={c.id}>

@@ -167,6 +167,8 @@ export type ResearchStatus = {
   model_error: string | null;
   dense_model: string | null;
   reranker_model: string | null;
+  generation_provider: string;
+  generation_model: string;
   evaluation: {
     results: Record<
       string,

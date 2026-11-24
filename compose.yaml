@@ -49,6 +49,11 @@ services:
       FORMFLOW_MODE: ${FORMFLOW_MODE:-DEMO}
       DEVELOPMENT: ${DEVELOPMENT:-true}
       RETENTION_DAYS: ${RETENTION_DAYS:-30}
+      FORMFLOW_LLM_PROVIDER: ${FORMFLOW_LLM_PROVIDER:-ollama}
+      FORMFLOW_LLM_MODEL: ${FORMFLOW_LLM_MODEL:-qwen3:4b}
+      FORMFLOW_LLM_URL: ${FORMFLOW_LLM_URL:-http://host.docker.internal:11434}
+      FORMFLOW_LLM_API_KEY: ${FORMFLOW_LLM_API_KEY:-}
+      FORMFLOW_LLM_TIMEOUT: ${FORMFLOW_LLM_TIMEOUT:-90}
     ports: ["127.0.0.1:8000:8000"]
     volumes: ["./data:/app/data"]
     tmpfs: ["/tmp:rw,noexec,nosuid,size=512m"]

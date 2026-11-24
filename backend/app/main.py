@@ -546,7 +546,7 @@ def research_schemes():
 @app.get(PREFIX + "/research/status")
 def research_status():
     index = research_index()
-    return {"sources": list(index.sources.values()), "passage_count": len(index.passages), "model_error": index.model_error, "dense_model": os.getenv("FORMFLOW_EMBED_MODEL") or None, "reranker_model": os.getenv("FORMFLOW_RERANK_MODEL") or None}
+    return {"sources": list(index.sources.values()), "passage_count": len(index.passages), "model_error": index.model_error, "dense_model": os.getenv("FORMFLOW_EMBED_MODEL") or None, "reranker_model": os.getenv("FORMFLOW_RERANK_MODEL") or None, "generation_provider": os.getenv("FORMFLOW_LLM_PROVIDER", "ollama"), "generation_model": os.getenv("FORMFLOW_LLM_MODEL", "qwen3:4b")}
 
 
 @app.get(PREFIX + "/admin/research")

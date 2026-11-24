@@ -1,4 +1,4 @@
-"""Versioned public-source retrieval and conservative extractive answers.
+"""Versioned public-source retrieval for grounded answer generation.
 
 Source text is data. No instruction or URL found inside a page is executed.
 Dense and reranker models are optional and lazy so the default CPU path starts
@@ -193,54 +193,5 @@ class ResearchIndex:
         return [dict(self.items[index], score=score) for index, score in candidates[:limit]]
 
     def answer(self, query, scheme_id=None):
-        lower = query.casefold()
-        kannada = bool(re.search("[\u0c80-\u0cff]", query))
-        if not scheme_id:
-            for name, identifier in (("sandhya", "ka-sandhya"), ("ಸಂಧ್ಯಾ", "ka-sandhya"), ("widow", "ka-widow"), ("ವಿಧವಾ", "ka-widow"), ("old age", "ka-ignoaps"), ("indira", "ka-ignoaps"), ("ವೃದ್ಧಾಪ್ಯ", "ka-ignoaps")):
-                if name in lower:
-                    scheme_id = identifier
-                    break
-        hits = self.retrieve(query, 8, scheme_id, mode="hybrid_rerank")
-        def matches(*words):
-            return any(word in lower for word in words)
-        category = None
-        wanted = None
-        if matches("document", "proof", "certificate", "ದಾಖಲೆ", "ಪ್ರಮಾಣ", "ಆಧಾರ್"):
-            category = "application_documents"
-        elif matches("apply", "application", "where", "ಅರ್ಜಿ", "ಸಲ್ಲಿಸ"):
-            category = "application"
-        elif matches("amount", "benefit", "how much", "ಮೊತ್ತ", "ಮಾಸಾಶನ"):
-            category = "benefits"
-        elif matches("remarry", "exclusion", "excluded", "ಹೊರತ", "ಪುನರ್ವಿವಾಹ"):
-            category = "exceptions"
-        elif matches("income", "ಆದಾಯ"):
-            category = "eligibility"
-            wanted = "income"
-        elif matches("deposit", "savings", "ಠೇವಣಿ"):
-            category = "eligibility"
-            wanted = "deposit"
-        elif matches("age", "old", "ವಯಸ್ಸು", "ವರ್ಷ"):
-            category = "eligibility"
-            wanted = "age"
-        elif matches("eligible", "eligibility", "condition", "ಅರ್ಹತೆ", "ಮಾನದಂಡ"):
-            category = "eligibility"
-        elif matches("pension", "other pension", "private source", "ಖಾಸಗಿ"):
-            category = "eligibility"
-            wanted = "pension"
-        if not scheme_id or not category:
-            message = "ಯೋಜನೆಯನ್ನು ಆರಿಸಿ ಮತ್ತು ವಯಸ್ಸು, ಆದಾಯ, ಅರ್ಹತೆ, ಹೊರತಾಗಿರುವವರು, ಪ್ರಯೋಜನ ಅಥವಾ ದಾಖಲೆಗಳ ಬಗ್ಗೆ ಕೇಳಿ. ಈ ಪ್ರಶ್ನೆಗೆ ಸಾಕಷ್ಟು ಮೂಲ ಮಾಹಿತಿ ಇಲ್ಲ." if kannada else "Choose a scheme and ask about age, income, eligibility, exceptions, benefits, application or documents. The source does not support an answer to this question."
-            return {"answer": message, "citations": [], "status": "insufficient_evidence", "model_status": self.model_error or "source linked research annotations active", "passages": hits}
-        scheme = next(s for s in self.schemes if s["id"] == scheme_id)
-        best = [f for f in scheme[category] if wanted is None or wanted in f["value"].casefold()]
-        passage_by_id = {p["id"]: p for p in self.passages}
-        citations = []
-        for field in best:
-            for ref in field["passages"]:
-                p = passage_by_id[ref]
-                if ref not in {c["id"] for c in citations}:
-                    citations.append({"id": ref, "url": p["url"], "section": p["section"], "page": p["page"], "text": p["text"], "source_version": p["version"]})
-        if not best:
-            message = "ಈ ಪ್ರಶ್ನೆಗೆ ಉತ್ತರಿಸಲು ಸಂಗ್ರಹಿಸಿದ ಅಧಿಕೃತ ಮೂಲಗಳಲ್ಲಿ ಸಾಕಷ್ಟು ಪರಿಶೀಲಿತ ಮಾಹಿತಿ ಇಲ್ಲ." if kannada else "The collected official sources do not provide enough checked information to answer this question."
-            return {"answer": message, "citations": [], "status": "insufficient_evidence", "model_status": self.model_error or "keyword retrieval active; dense model not configured", "passages": hits}
-        answer = " ".join(passage_by_id[ref]["text"] for f in best for ref in f["passages"]) if kannada else " ".join(f["value"] for f in best)
-        return {"answer": answer, "citations": citations, "status": "source_linked_research_annotation", "model_status": self.model_error or ("hybrid retrieval active" if os.getenv("FORMFLOW_EMBED_MODEL") else "keyword retrieval active; dense model not configured"), "passages": hits}
+        from .rag import answer
+        return answer(self, query, scheme_id)

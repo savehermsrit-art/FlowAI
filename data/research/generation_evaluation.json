@@ -1,0 +1,178 @@
+{
+  "measured_at": "2026-11-23T19:02:53.655504+00:00",
+  "dataset_status": "12 author-generated development probes; no independent review",
+  "provider": "ollama",
+  "model": "qwen3:4b",
+  "dense_model": null,
+  "reranker_model": null,
+  "citation_hits": 12,
+  "answer_count": 12,
+  "cases": [
+    {
+      "id": "sandhya-age-en",
+      "status": "grounded_generation",
+      "answer": "The age requirement for Sandhya Suraksha is 65 years or above. [1]",
+      "expected_source_ids": [
+        "dssp-sandhya:28ceedeef059:1"
+      ],
+      "cited_source_ids": [
+        "dssp-sandhya:28ceedeef059:1"
+      ],
+      "expected_citation_hit": true,
+      "seconds": 10.59
+    },
+    {
+      "id": "sandhya-age-kn",
+      "status": "grounded_generation",
+      "answer": "ಸಂಧ್ಯಾ ಸುರಕ್ಷಾ ಯೋಜನೆಗೆ ವಯಸ್ಸು 65 ವರ್ಷದ ಅಥವಾ ಮೇಲ್ಪಟ್ಟ ವಯಸ್ಸಿನ ಹಿರಿಯ ಜೀವಗಳನ್ನು ಆರ್ಥಿಕ ಸಂಕಷ್ಟದಿಂದ ಪಾರು ಮಾಡುವ ದಿಶೆಯಲ್ಲಿ ಸಂಧ್ಯಾ ಸುರಕ್ಷಾ ಯೋಜನೆಯನ್ನು ದಿನಾಂಕ:2-7-2007 ರಿಂದ ಮಾಸಾಶನವನ್ನು ಪ್ರಾರಂಭಿಸಲಾಗಿದೆ. [1] [2]",
+      "expected_source_ids": [
+        "dssp-sandhya:28ceedeef059:1"
+      ],
+      "cited_source_ids": [
+        "dssp-sandhya:28ceedeef059:0",
+        "dssp-sandhya:28ceedeef059:1"
+      ],
+      "expected_citation_hit": true,
+      "seconds": 28.97
+    },
+    {
+      "id": "sandhya-income-en",
+      "status": "grounded_generation",
+      "answer": "The combined annual income limit for Sandhya Suraksha is ₹32,000 [1]",
+      "expected_source_ids": [
+        "dssp-sandhya:28ceedeef059:16"
+      ],
+      "cited_source_ids": [
+        "dssp-sandhya:28ceedeef059:16"
+      ],
+      "expected_citation_hit": true,
+      "seconds": 6.03
+    },
+    {
+      "id": "sandhya-income-kn",
+      "status": "grounded_generation",
+      "answer": "ಸಂಧ್ಯಾ ಸುರಕ್ಷಾ ಯೋಜನೆಗೆ ಆದಾಯ ಮಿತಿ ರೂ.32,000/- [1]",
+      "expected_source_ids": [
+        "dssp-sandhya:28ceedeef059:16"
+      ],
+      "cited_source_ids": [
+        "dssp-sandhya:28ceedeef059:16"
+      ],
+      "expected_citation_hit": true,
+      "seconds": 7.21
+    },
+    {
+      "id": "ignoaps-documents-en",
+      "status": "grounded_generation",
+      "answer": "The applicant must provide proof of residence [1] The applicant must provide proof of age [2] The applicant must provide bank and account details [3]",
+      "expected_source_ids": [
+        "dssp-ignoaps:141825819c44:15",
+        "dssp-ignoaps:141825819c44:17",
+        "dssp-ignoaps:141825819c44:19",
+        "dssp-ignoaps:141825819c44:21"
+      ],
+      "cited_source_ids": [
+        "dssp-ignoaps:141825819c44:15",
+        "dssp-ignoaps:141825819c44:17",
+        "dssp-ignoaps:141825819c44:19"
+      ],
+      "expected_citation_hit": true,
+      "seconds": 8.9
+    },
+    {
+      "id": "ignoaps-documents-kn",
+      "status": "grounded_generation",
+      "answer": "ವಯಸ್ಸಿನ ದೃಢೀಕೃತ ದಾಖಲೆ [1] ಜನನ ಪ್ರಮಾಣ ಪತ್ರ [2] ವೈದ್ಯಕೀಯ ದೃಢೀಕರಣ ಪತ್ರ [2]",
+      "expected_source_ids": [
+        "dssp-ignoaps:141825819c44:15",
+        "dssp-ignoaps:141825819c44:17",
+        "dssp-ignoaps:141825819c44:19",
+        "dssp-ignoaps:141825819c44:21"
+      ],
+      "cited_source_ids": [
+        "dssp-ignoaps:141825819c44:12",
+        "dssp-ignoaps:141825819c44:17"
+      ],
+      "expected_citation_hit": true,
+      "seconds": 17.45
+    },
+    {
+      "id": "widow-remarriage-en",
+      "status": "grounded_generation",
+      "answer": "Widow pension stops after remarriage [1]",
+      "expected_source_ids": [
+        "dssp-widow:455018413079:8"
+      ],
+      "cited_source_ids": [
+        "dssp-widow:455018413079:8"
+      ],
+      "expected_citation_hit": true,
+      "seconds": 8.8
+    },
+    {
+      "id": "widow-income-kn",
+      "status": "grounded_generation",
+      "answer": "ವಿಧವಾ ವೇತನ ಯೋಜನೆಗೆ ವಾರ್ಷಿಕ ಆದಾಯ ಮಿತಿ ರೂ. 32,000/- [1]",
+      "expected_source_ids": [
+        "dssp-widow:455018413079:6"
+      ],
+      "cited_source_ids": [
+        "dssp-widow:455018413079:6"
+      ],
+      "expected_citation_hit": true,
+      "seconds": 7.2
+    },
+    {
+      "id": "ignoaps-age-en",
+      "status": "grounded_generation",
+      "answer": "The applicant must be 60 years or older for the national old age pension. [1]",
+      "expected_source_ids": [
+        "dssp-ignoaps:141825819c44:4"
+      ],
+      "cited_source_ids": [
+        "dssp-ignoaps:141825819c44:4"
+      ],
+      "expected_citation_hit": true,
+      "seconds": 5.72
+    },
+    {
+      "id": "sandhya-benefit-kn",
+      "status": "grounded_generation",
+      "answer": "ಸಂಧ್ಯಾ ಸುರಕ್ಷಾ ಯೋಜನೆಯ ಪಿಂಚಣಿ ಮೊತ್ತ 1200 ರೂಪಾಯಿ [1]",
+      "expected_source_ids": [
+        "dssp-sandhya:28ceedeef059:34"
+      ],
+      "cited_source_ids": [
+        "dssp-sandhya:28ceedeef059:34"
+      ],
+      "expected_citation_hit": true,
+      "seconds": 4.99
+    },
+    {
+      "id": "sandhya-deposit-en",
+      "status": "grounded_generation",
+      "answer": "There is a deposit limit of ₹10,000 for Sandhya Suraksha [1]",
+      "expected_source_ids": [
+        "dssp-sandhya:28ceedeef059:18"
+      ],
+      "cited_source_ids": [
+        "dssp-sandhya:28ceedeef059:18"
+      ],
+      "expected_citation_hit": true,
+      "seconds": 6.36
+    },
+    {
+      "id": "widow-apply-kn",
+      "status": "grounded_generation",
+      "answer": "ವಿಧವಾ ವೇತನಕ್ಕೆ ಅರ್ಜಿ ಸಲ್ಲಿಸುವ ಸ್ಥಳವು ಅಟಲ್‌ ಜೀ ಜನಸ್ನೇಹಿ ಕೇಂದ್ರಗಳಲ್ಲಿ ಇರುತ್ತದೆ [1]",
+      "expected_source_ids": [
+        "dssp-widow:455018413079:19"
+      ],
+      "cited_source_ids": [
+        "dssp-widow:455018413079:19"
+      ],
+      "expected_citation_hit": true,
+      "seconds": 8.99
+    }
+  ]
+}
